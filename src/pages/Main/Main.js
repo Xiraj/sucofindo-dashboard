@@ -1,9 +1,7 @@
 import React from 'react'
 
-const Main = () => {
+export default function Login () {
   return (
     <div>Main Dashboard</div>
   )
 }
-
-export default Main;
