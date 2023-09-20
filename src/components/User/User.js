@@ -1,0 +1,29 @@
+import React from "react";
+import { FaUserCircle } from "react-icons/fa";
+import Notification from "../Notification/Notification";
+import { MdWavingHand } from "react-icons/md";
+
+export default function User () {
+    return(
+        <div className="bg-[#ffff] w-full">
+            <div className="flex justify-between m-[1.5rem] ">
+                <div className="flex gap-4">
+                    <h1 className="text-main-color ml-[1rem] font-extrabold ">Selamat Datang</h1>
+                    <MdWavingHand color="#E9B824" size={24}/>
+                </div>
+                <div className="flex justify-end">
+                    <div className="mr-[1.5rem]">
+                        <Notification/>
+                    </div>
+                    <div className="flex">
+                        <div className="text-main-color font-normal mr-[0.5rem] border-r-2 border-r-main-color"/>
+                        <h1 className="text-main-color mr-[0.5rem]">Nurul</h1>
+                    </div>
+                    <div className="mr-[1.5rem] ">
+                        <FaUserCircle color="#4E73DF" size={26}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
