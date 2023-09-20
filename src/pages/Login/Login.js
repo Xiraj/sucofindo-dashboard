@@ -8,10 +8,10 @@ export default function Login () {
     <div>
         <div className="flex flex-row">
             <div className="mt-[12.5rem] ml-[2.125rem]">
-                <img alt="image" src={imageLogin} />
+                <img alt="LoginImage" src={imageLogin} />
             </div>
             <div className="mt-[2rem] ml-[8rem]">
-                <img alt="image-login" src={logo} />
+                <img alt="SucofindoLogin" src={logo} />
                 <div className="mt-[3rem]">
                     <p className="text-[2rem] font-semibold">Selamat Datang di Sucofindo</p>
                     <p className="text-[1.25rem] font-regular mt-[1.25rem]">Silakan masukkan akun Anda!</p>
