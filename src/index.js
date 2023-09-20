@@ -6,12 +6,13 @@ import TotalAset from './Routes/TotalAset/TotalAset';
 import BarangMasuk from './Routes/BarangMasuk/BarangMasuk';
 import BarangKeluar from './Routes/BarangKeluar/BarangKeluar';
 import Riwayat from './Routes/Riwayat/Riwayat';
+import Login from './pages/Login/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Router>
     <Routes>
-      <Route path='/' element={<TotalAset/>}/>
+      <Route path='/Login' element={<Login/>}/>
       <Route path='/Total-Aset' element={<TotalAset/>}/>
       <Route path='/Barang-Masuk' element={<BarangMasuk/>}/>
       <Route path='/Barang-Keluar' element={<BarangKeluar/>}/>
