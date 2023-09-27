@@ -32,7 +32,7 @@ export default function LoginForm () {
                 </div>
                 <Link to='/Total-Aset'>
                   <button className='bg-main-color w-[27rem] h-[3.25rem] mt-[2.5rem] rounded-md text-white font-semibold'>
-                  Masuk
+                    Masuk
                   </button>
                 </Link>
             </div>
