@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 export default function LoginForm () {
     const [showPass, setShowPass] = useState(false);
@@ -29,9 +30,11 @@ export default function LoginForm () {
                     { showPass? <AiFillEye color="c4c4c4" size={24} /> : <AiFillEyeInvisible color="c4c4c4" size={24} /> }
                   </span>
                 </div>
-                <button className='bg-main-color w-[27rem] h-[3.25rem] mt-[2.5rem] rounded-md text-white font-semibold'>
-                  Masuk
-                </button>
+                <Link to='/Total-Aset'>
+                  <button className='bg-main-color w-[27rem] h-[3.25rem] mt-[2.5rem] rounded-md text-white font-semibold'>
+                    Masuk
+                  </button>
+                </Link>
             </div>
         </form>
     </div>
