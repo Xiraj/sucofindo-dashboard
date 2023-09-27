@@ -5,10 +5,10 @@ import User from "../../components/User/User";
 
 export default function TotalAset () {
     return(
-        <div className="flex w-full">
-            <Sidebar/>
+        <div className="flex h-full">
+            <Sidebar className="fixed"/>
             <div className="w-full">
-                <div className="h-[3.75rem]">
+                <div className="h-[3.7rem]">
                     <User/>
                 </div>
                 <div className="">

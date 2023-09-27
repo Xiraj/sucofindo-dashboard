@@ -6,8 +6,7 @@ import Login from './pages/Login';
 
 export default function App () {
   return (
-    <div className='flex'>
-      <Sidebar/>
+    <div className=''>
       <Login/>
     </div>
   )

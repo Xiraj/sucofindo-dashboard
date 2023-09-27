@@ -2,6 +2,8 @@ import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 import Notification from "../Notification/Notification";
 import { MdWavingHand } from "react-icons/md";
+// import Clock from "../Clock/Clock";
+import { Badge } from "@mui/material";
 
 export default function User () {
     return(
@@ -12,14 +14,19 @@ export default function User () {
                     <MdWavingHand color="#E9B824" size={24}/>
                 </div>
                 <div className="flex justify-end">
-                    <div className="mr-[1.5rem]">
-                        <Notification/>
+                    {/* <div className="mr-16">
+                        <Clock/>
+                    </div> */}
+                    <div className="mr-[2.5rem] mt-3 cursor-pointer">
+                        <Badge badgeContent={4} color="primary">
+                            <Notification/>
+                        </Badge>
                     </div>
                     <div className="flex">
-                        <div className="text-main-color font-normal mr-[0.5rem] border-r-2 border-r-main-color"/>
-                        <h1 className="text-main-color mr-[0.5rem]">Nurul</h1>
+                        <div className="text-main-color font-normal mr-[0.9rem] mt-3 border-r-2 border-r-main-color"/>
+                        <h1 className="text-main-color mr-[1rem] mt-3 ">Nurul</h1>
                     </div>
-                    <div className="mr-[1.5rem] ">
+                    <div className="mr-[1.5rem] mt-3">
                         <FaUserCircle color="#4E73DF" size={26}/>
                     </div>
                 </div>
