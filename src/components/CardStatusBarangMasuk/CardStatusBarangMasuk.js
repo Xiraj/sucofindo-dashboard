@@ -1,4 +1,5 @@
 import React from "react";
+import ImageView from "../ImageView";
 
 export default function CardStatusBarangMasuk () {
     return(
@@ -21,8 +22,8 @@ export default function CardStatusBarangMasuk () {
                     <p>Dummy</p>
                   </div>
 									<p className="text-[1.25rem] font-semibold text-[#515151] mt-[2.2rem]">Foto Aset</p>
-										<div className="bg-white p-4 shadow-md rounded-lg w-[27rem] h-[20rem] overflow-y-scroll mb-[2rem]">
-											<img src="https://images5.alphacoders.com/131/1317015.jpeg"/>
+										<div className="bg-white p-4 border-2 rounded-lg w-[27rem] h-[20rem] overflow-y-scroll mb-[2rem] mt-4">
+											<ImageView imageUrl="https://images.unsplash.com/photo-1566895291281-ea63efd4bdbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8OSUzQTE2fGVufDB8fDB8fHww&w=1000&q=80" />
 										</div>
               </div>
           </div>
