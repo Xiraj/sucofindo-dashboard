@@ -1,38 +1,40 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
-const ImageView = () => {
-  const [imageSrc, setImageSrc] = useState(null);
+function ImageViewer({ imageUrl }) {
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-
-      reader.onload = (e) => {
-        setImageSrc(e.target.result);
-      };
-
-      reader.readAsDataURL(file);
-    }
+  const toggleFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
   };
 
   return (
     <div>
-      <h1>Image Preview</h1>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-      />
-      {imageSrc && (
-        <div>
-          <h2>Preview:</h2>
-          <img src="https://www.sucofindo.co.id/wp-content/uploads/2022/09/Sucofindo_Utama.png" alt="Preview" />
+    {isFullScreen ? (
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-90">
+          <div className="max-w-screen-xl h-screen mx-auto overflow-hidden flex items-center justify-center">
+            <img
+              src={imageUrl}
+              alt="Full Screen"
+              className="max-h-screen w-auto h-auto max-w-full object-contain"
+            />
+          </div>
+          <button
+            className="absolute top-5 right-5 text-white text-2xl z-60 hover:text-red-500"
+            onClick={toggleFullScreen}
+          >
+            &#x2716;
+          </button>
         </div>
+      ) : (
+        <img
+          src={imageUrl}
+          alt="Thumbnail"
+          className="cursor-pointer max-h-80vh max-w-full transition-transform duration-300 transform hover:scale-105"
+          onClick={toggleFullScreen}
+        />
       )}
     </div>
   );
-};
+}
 
-export default ImageView;
+export default ImageViewer;
