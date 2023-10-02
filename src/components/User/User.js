@@ -7,19 +7,19 @@ import { Badge } from "@mui/material";
 
 export default function User () {
     return(
-        <div className="bg-[#ffff] w-full">
+        <div className="bg-[#ffff] w-full h-12">
             <div className="flex justify-between m-[1.5rem] ">
-                <div className="flex gap-4">
-                    <h1 className="text-main-color ml-[1rem] font-extrabold ">Selamat Datang</h1>
+                <div className="flex gap-4 ml-[1rem] pt-3">
+                    <h1 className="text-main-color font-extrabold ">Selamat Datang</h1>
                     <MdWavingHand color="#E9B824" size={24}/>
                 </div>
                 <div className="flex justify-end">
                     {/* <div className="mr-16">
                         <Clock/>
                     </div> */}
-                    <div className="mr-[2.5rem] mt-3 cursor-pointer">
+                    <div className="mr-[2.5rem] pt-3 cursor-pointer">
                         <Badge badgeContent={4} color="primary">
-                            <Notification/>
+                            <Notification size={20} />
                         </Badge>
                     </div>
                     <div className="flex">

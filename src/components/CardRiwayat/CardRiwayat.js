@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import DataTable from "../DataTable/DataTable";
 
-export default function CardPengguna () {
+export default function CardRiwayat () {
     const data = [
         {
             id: 1,
@@ -10,7 +10,7 @@ export default function CardPengguna () {
             email: 'Admin1@gmail.com',
             unit: 'Admin_Brebes',
         },
-{
+        {
             id: 2,
             no: 2,
             nama: 'Administrator2',
@@ -45,6 +45,34 @@ export default function CardPengguna () {
             email: 'Admin6@gmail.com',
             unit: 'Admin_Brebes6',
         },
+        {
+            id: 7,
+            no: 7,
+            nama: 'Administrator7',
+            email: 'Admin5@gmail.com',
+            unit: 'Admin_Brebes7',
+        },
+        {
+            id: 8,
+            no: 8,
+            nama: 'Administrator8',
+            email: 'Admin6@gmail.com',
+            unit: 'Admin_Brebes8',
+        },
+        {
+            id: 9,
+            no: 9,
+            nama: 'Administrator9',
+            email: 'Admin9@gmail.com',
+            unit: 'Admin_Brebes9',
+        },
+        {
+            id: 10,
+            no: 10,
+            nama: 'Administrator10',
+            email: 'Admin10@gmail.com',
+            unit: 'Admin_Brebes10',
+        },
     ];
     
     const columns = [
@@ -70,12 +98,12 @@ export default function CardPengguna () {
     const [ open ] = useState(true);
 
     return(
-        <div className={`${open ? 'w-[67.291rem] h-[24.5rem]':'w-[97.291rem] h-[24.5rem]'} bg-white ml-[2.5rem] mt-[3.5rem] rounded-xl`}>
+        <div className={`${open ? 'w-[67.291rem] h-screen':'w-[97.291rem] h-[21.5rem]'} bg-white ml-[2.5rem] mt-[3.5rem] rounded-xl`}>
             <div className="flex">
-                <h1 className="ml-[2.5rem] pt-[1.5rem] text-[2rem] ">Daftar Pengguna</h1>
+                <h1 className="ml-[2.5rem] pt-[1.5rem] text-[2rem] ">Riwayat</h1>
             </div>
-            <div className="container w-[62.5rem] ml-[2.5rem] rounded-lg mt-5 pb-2 overflow-y-auto overflow-x-hidden h-[250px]">
-                <DataTable data={data} columns={columns} />
+            <div className="container w-[62.5rem] ml-[2.5rem] rounded-lg mt-3 overflow-y-hidden overflow-x-hidden h-[40rem]">
+                <DataTable data={data} columns={columns}/>
             </div>
         </div>
     );
