@@ -1,20 +1,21 @@
 import React from "react";
 import Sidebar from "../../components/Sidebar/Sidebar/Sidebar";
-import User from "../../components/User/User";
+import AppBar from "../../components/AppBar/AppBar";
 import RiwayatPage from "../../pages/RiwayatPage/RiwayatPage";
+import { Box } from "@mui/material";
 
 export default function Riwayat () {
     return(
-        <div className="flex w-full">
+        <Box className="flex w-full">
             <Sidebar/>
-            <div className="w-full">
-                <div className="h-[3.75rem]">
-                    <User/>
-                </div>
-                <div className="">
+            <Box className="w-full">
+                <Box className="h-[3.75rem]">
+                    <AppBar/>
+                </Box>
+                <Box className="relative bottom-5">
                     <RiwayatPage/>
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     );
 }

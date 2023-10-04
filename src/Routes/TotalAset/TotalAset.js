@@ -1,20 +1,21 @@
 import React from "react";
+import { Box } from "@mui/material";
 import Sidebar from "../../components/Sidebar/Sidebar/Sidebar";
 import TotalAsetPage from "../../pages/TotalAsetPage/TotalAsetPage";
-import User from "../../components/User/User";
+import AppBar from "../../components/AppBar/AppBar";
 
 export default function TotalAset () {
     return(
-        <div className="flex w-full">
-            <Sidebar/>
-            <div className="w-full">
-                <div className="h-[3.75rem]">
-                    <User/>
-                </div>
-                <div className="">
+        <Box className="flex h-full">
+            <Sidebar className="fixed"/>
+            <Box className="w-full">
+                <Box className="h-[3.7rem]">
+                    <AppBar/>
+                </Box>
+                <Box className="">
                     <TotalAsetPage/>
-                </div>
-            </div>
-        </div>
+                </Box>
+            </Box>
+        </Box>
     );
 }
