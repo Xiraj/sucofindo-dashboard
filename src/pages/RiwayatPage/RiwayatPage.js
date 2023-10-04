@@ -1,12 +1,13 @@
 import React from "react";
 import CardRiwayat from "../../components/CardRiwayat/CardRiwayat";
+import { Box } from "@mui/material";
 
 export default function RiwayatPage () {
     return(
-        <div className="bg-[#f3f3f3] w-full h-screen ">
-            <div className="relative bottom-4">
+        <Box className="bg-[#f3f3f3] w-full h-screen ">
+            <Box className="relative bottom-4">
                 <CardRiwayat/>
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 }

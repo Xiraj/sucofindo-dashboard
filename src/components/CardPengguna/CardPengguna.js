@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Box } from "@mui/material";
 import DataTable from "../DataTable/DataTable";
 
 export default function CardPengguna () {
@@ -70,13 +71,13 @@ export default function CardPengguna () {
     const [ open ] = useState(true);
 
     return(
-        <div className={`${open ? 'w-[67.291rem] h-[24.5rem]':'w-[97.291rem] h-[24.5rem]'} bg-white ml-[2.5rem] mt-[3.5rem] rounded-xl`}>
-            <div className="flex">
+        <Box className={`bg-white w-full md:w-[67.291rem] mx-auto md:h-[36.5rem] mt-5 p-5 rounded-xl`}>
+            <Box className="flex">
                 <h1 className="ml-[2.5rem] pt-[1.5rem] text-[2rem] ">Daftar Pengguna</h1>
-            </div>
-            <div className="container w-[62.5rem] ml-[2.5rem] rounded-lg mt-5 pb-2 overflow-y-auto overflow-x-hidden h-[250px]">
+            </Box>
+            <Box className="container w-full md:w-[62.5rem] ml-2 md:ml-[2.5rem] rounded-lg mt-5 pb-2 overflow-y-auto overflow-x-hidden md:h-[450px]">
                 <DataTable data={data} columns={columns} />
-            </div>
-        </div>
+            </Box>
+        </Box>
     );
 }

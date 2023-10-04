@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Box } from "@mui/material";
 import { Link } from 'react-router-dom';
 import SucofindoLogo from '../../../assets/logo-sucofindo.png';
 import { BsArrowLeftCircleFill } from 'react-icons/bs';
@@ -9,7 +10,7 @@ export default function Sidebar () {
   const [open, setOpen] = useState(true);
   const menuItems = [
     {   icon: <FaFolder 
-                className={`${!open && 'cursor-pointer ml-3 w-[8rem]'}`} 
+                className={`${!open && 'cursor-pointer ml-2 w-[8rem]'}`} 
                 color='white' size={`${ open ? 20 : 26 }`} 
         />, 
         to: '/Total-Aset', label: 'Total Aset'
@@ -35,16 +36,16 @@ export default function Sidebar () {
   ];
   return (
     <aside className='flex z-10'>
-      <div className={`${ open ? "w-[16rem]" : "w-[8rem]" } duration-300 bg-main-color`}>
-        <div className='flex'>
-          <div className='mt-[1.5rem] ml-[1.5rem]'>
+      <Box className={`${ open ? "w-[16rem]" : "w-[8rem]" } duration-300 bg-main-color`}>
+        <Box className='flex'>
+          <Box className='mt-[1.5rem] ml-[1.5rem]'>
             <img
               alt='sucofindo-logo'
               className='w-[7.813rem] h-[5.375rem]'
               src={SucofindoLogo}
             />
-          </div>
-          <div className='cursor-pointer mt-[4rem] ml-[4.5rem] mr-[1.5rem]'>
+          </Box>
+          <Box className='cursor-pointer mt-[4rem] ml-[4.5rem] mr-[1.5rem]'>
             <button>
               <BsArrowLeftCircleFill
                 color='white'
@@ -53,15 +54,15 @@ export default function Sidebar () {
                 size={`${open ? 24 : 24 }`}
               />
             </button>
-          </div>
-        </div>
-        <div className={
+          </Box>
+        </Box>
+        <Box className={
           ` ${ open ? 'mt-[1.5rem] ml-[1.5rem] w-[13rem] h-[0.031rem] bg-white' 
           : 'mt-[0.5rem] ml-[0.5rem] w-[7rem] h-[0.031rem] bg-white' }`}
         />
         <ul className='ml-[1.5rem] mt-[2rem]'>
           {menuItems.map((item, i) => (
-            <li key={i} className='flex '>
+            <li key={i} className='flex'>
               {item.icon}
               <Link
                 className={`ml-[0.75rem] text-white mb-[2rem] ${!open && 'opacity-0 translate-x-28 overflow-hidden'}`}
@@ -75,7 +76,7 @@ export default function Sidebar () {
             </li>
           ))}
         </ul>
-      </div>
+      </Box>
     </aside>
   )
 }

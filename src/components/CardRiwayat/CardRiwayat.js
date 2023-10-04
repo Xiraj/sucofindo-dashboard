@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import DataTable from "../DataTable/DataTable";
+import Tabs from "../Tab/Tab";
+import { Box } from "@mui/material";
 
 export default function CardRiwayat () {
     const data = [
@@ -98,13 +99,13 @@ export default function CardRiwayat () {
     const [ open ] = useState(true);
 
     return(
-        <div className={`${open ? 'w-[67.291rem] h-screen':'w-[97.291rem] h-[21.5rem]'} bg-white ml-[2.5rem] mt-[3.5rem] rounded-xl`}>
-            <div className="flex">
+        <Box className={`${open ? 'w-[67.291rem] h-[102vh]':''} bg-white ml-[2.5rem] mt-[3.5rem] rounded-xl`}>
+            <Box className="flex">
                 <h1 className="ml-[2.5rem] pt-[1.5rem] text-[2rem] ">Riwayat</h1>
-            </div>
-            <div className="container w-[62.5rem] ml-[2.5rem] rounded-lg mt-3 overflow-y-hidden overflow-x-hidden h-[40rem]">
-                <DataTable data={data} columns={columns}/>
-            </div>
-        </div>
+            </Box>
+            <Box className='ml-10 mt-2 '>
+                <Tabs/>
+            </Box>
+        </Box>
     );
 }

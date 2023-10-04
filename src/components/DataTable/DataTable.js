@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Data from '../../Data.json';
+import { Box } from "@mui/material";
 
 function DataTable() {
     const [ currentPage, setCurrentPage ] = useState(1);
@@ -10,20 +11,20 @@ function DataTable() {
     const nPage = Math.ceil(Data.length / recordPerPage);
     const numbers = [...Array(nPage + 1).keys()].slice(1);
     return (
-        <div>
+        <Box>
             <table className='container'>
                 <thead className='w-[62.5rem] h-[3.5rem] bg-[#F3F3F3]'>
                     <tr>
-                        <td className='w-[1.5rem] pl-2 border border-[#e8e8e8]'>
+                        <td className='w-[1.5rem] pl-2 border-l-2 border-y-2 border-y-[#E8E8E8]'>
                             No
                         </td>
-                        <td className='w-[18.625rem] pl-[2rem] border border-[#e8e8e8]'>
+                        <td className='w-[18.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>
                             Nama
                         </td>
-                        <td className='w-[20.625rem] border border-[#e8e8e8]'>
+                        <td className='w-[20.625rem] border-y-2 border-[#e8e8e8]'>
                             Email
                         </td>
-                        <td className='w-[20.625rem] border border-[#e8e8e8]'>
+                        <td className='w-[20.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>
                             Unit
                         </td>
                     </tr>
@@ -39,46 +40,8 @@ function DataTable() {
                     ))}
                 </tbody>
             </table>
-            {/* <nav>
-                <ul className='pagination'>
-                    <li className='page-item'>
-                        <a className='page-link' href='#' onClick={prePage}>
-                            Prev
-                        </a>
-                    </li>
-                    {
-                        numbers.map((n, i) => {
-                            <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>
-                                <a href='#' onClick={() => changeCPage(n)}>
-                                    {n}
-                                </a>
-                            </li>
-                        })
-                    }
-                    <li className='page-item'>
-                        <a className='page-link' href='#' onClick={nextPage}>
-                            Next
-                        </a>
-                    </li>
-                </ul>
-            </nav> */}
-        </div>
+        </Box>
     );
-    // function prePage() {
-    //     if (currentPage > 1) {
-    //       setCurrentPage(currentPage - 1);
-    //     }
-    //   }
-      
-    // function changeCPage(id) {
-    //     setCurrentPage(id);
-    // }
-      
-    // function nextPage() {
-    //     if (currentPage < nPage) {
-    //       setCurrentPage(currentPage + 1);
-    //     }
-    // }  
 }
 
 export default DataTable;
