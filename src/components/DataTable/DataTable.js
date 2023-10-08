@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Data from '../../Data.json';
 import { Box } from "@mui/material";
+import { Link } from 'react-router-dom';
 
 function DataTable() {
     const [ currentPage, setCurrentPage ] = useState(1);
@@ -33,7 +34,11 @@ function DataTable() {
                     {records.map((item, index) => (
                         <tr key={index}>
                             <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{item.no}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.nama}</td>
+                            <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>
+                                <Link to="/Detail-Barang-Masuk">
+                                    {item.nama}
+                                </Link>
+                            </td>
                             <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.email}</td>
                             <td className='w-[18.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>{item.unit}</td>
                         </tr>

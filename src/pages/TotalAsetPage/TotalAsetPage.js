@@ -6,7 +6,7 @@ import CardPengguna from "../../components/CardPengguna/CardPengguna";
 export default function TotalAsetPage () {
     const [open] = useState(true);
     return(
-        <Box className="bg-[#f3f3f3] w-full h-full">
+        <Box className="w-full h-full">
             <Box className={`${ open ? 'pt-[2rem] ' : 'justify-center items-center' }`}>
                 <CardAset />
             </Box>

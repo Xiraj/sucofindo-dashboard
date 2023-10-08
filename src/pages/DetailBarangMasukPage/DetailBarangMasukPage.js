@@ -1,21 +1,16 @@
 import React from "react";
 import CardDataBarangMasuk from "../../components/CardDataBarangMasuk";
 import CardStatusBarangMasuk from "../../components/CardStatusBarangMasuk";
-import Tabs from '../../components/TabRiwayat';
-import CardBarangMasuk from "../../components/CardBarangMasuk";
 
-export default function BarangMasukPage () {
+export default function DetailBarangMasukPage () {
     return(
         <div className="max-h-full">
-            <div className="relative top-[1 rem]">
-              <CardBarangMasuk/>
-            </div>
-            {/* <div className="relative top-[4rem]">
+            <div className="relative top-[4rem]">
                 <CardDataBarangMasuk/>
             </div>
             <div className="mt-[8.5rem]">
                 <CardStatusBarangMasuk/>
-            </div> */}
+            </div>
             <div className="flex flex-row mt-[1rem] ml-[50rem] mb-[2rem]">
                 <button className='bg-[#FF0404] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold mr-[2rem]'>
                     Tolak
