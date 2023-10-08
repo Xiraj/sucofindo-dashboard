@@ -4,7 +4,6 @@ import { Box } from "@mui/material";
 
 export default function CardRiwayat () {
     const [ open ] = useState(true);
-
     return(
         <Box className={`${open ? 'w-[67.291rem] h-[102vh]':''} bg-white ml-[2.5rem] mt-[3.5rem] rounded-xl`}>
             <Box className="flex">

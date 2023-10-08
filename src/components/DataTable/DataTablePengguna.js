@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Data from '../../Data.json';
+import Data from '../../DataPengguna.json';
 import { Box } from "@mui/material";
 import { Link } from 'react-router-dom';
 
-function DataTable() {
+function DataTablePengguna() {
     const [ currentPage, setCurrentPage ] = useState(1);
     const recordPerPage = 10;
     const lastIndex = currentPage * recordPerPage;
@@ -49,4 +49,4 @@ function DataTable() {
     );
 }
 
-export default DataTable;
+export default DataTablePengguna;
