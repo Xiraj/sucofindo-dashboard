@@ -5,6 +5,7 @@ import './index.css';
 import TotalAset from './Routes/TotalAset/TotalAset';
 import BarangMasuk from './Routes/BarangMasuk/BarangMasuk';
 import BarangKeluar from './Routes/BarangKeluar/BarangKeluar';
+import DetailBarangMasuk from './Routes/DetailBarangMasuk';
 import Riwayat from './Routes/Riwayat/Riwayat';
 import Login from './pages/Login/Login';
 
@@ -17,6 +18,7 @@ root.render(
       <Route path='/Total-Aset' element={<TotalAset/>}/>
       <Route path='/Barang-Masuk' element={<BarangMasuk/>}/>
       <Route path='/Barang-Keluar' element={<BarangKeluar/>}/>
+      <Route path='/Detail-Barang-Masuk' element={<DetailBarangMasuk/>}/>
       <Route path='/Riwayat' element={<Riwayat/>}/>
     </Routes>
   </Router>

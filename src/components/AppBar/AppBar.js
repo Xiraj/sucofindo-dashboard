@@ -48,8 +48,7 @@ function UserAppBar() {
               </MenuItem>
             </Box>
             <Tooltip title="Apakah kamu sudah seleai menggunakan dashboard?">
-              <IconButton  onClick={handleOpenUserMenu} sx={{ position: 'relative', left: '53.8rem' }}>
-                
+              <IconButton  onClick={handleOpenUserMenu} sx={{ position: 'relative', left: '53.8rem' }}> 
                 <h1 className='pr-2 text-[1rem]'>Admin Dashboard</h1>
                 <FaUserCircle color='#4E73DF' size={30}/>
               </IconButton>
