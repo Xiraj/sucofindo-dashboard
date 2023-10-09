@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import DataTableMasuk from '../DataTable/DataTableMasuk';
+import DataTableKeluar from '../DataTable/DataTableKeluar';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,14 +55,14 @@ export default function BasicTabs() {
           <Tab label="Ditolak" {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={0}>
-        <DataTableMasuk/>
+      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={0}>
+        <DataTableKeluar/>
       </CustomTabPanel>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={1}>
-        <DataTableMasuk/>
+      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={1}>
+        <DataTableKeluar/>
       </CustomTabPanel>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={2}>
-        <DataTableMasuk/>
+      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={2}>
+        <DataTableKeluar/>
       </CustomTabPanel>
     </Box>
   );
