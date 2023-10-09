@@ -1,0 +1,69 @@
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import DataTableMasuk from '../DataTable/DataTableMasuk';
+
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 0 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+CustomTabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+export default function BasicTabs() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box sx={{ width: '100%' }}>
+      <Box>
+        <Tabs value={value} onChange={handleChange}>
+          <Tab label="Menunggu" {...a11yProps(0)} />
+          <Tab label="Diterima" {...a11yProps(1)} />
+          <Tab label="Ditolak" {...a11yProps(2)} />
+        </Tabs>
+      </Box>
+      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={0}>
+        <DataTableMasuk/>
+      </CustomTabPanel>
+      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={1}>
+        <DataTableMasuk/>
+      </CustomTabPanel>
+      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={2}>
+        <DataTableMasuk/>
+      </CustomTabPanel>
+    </Box>
+  );
+}

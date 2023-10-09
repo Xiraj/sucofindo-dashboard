@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import Data from '../../DataPengguna.json';
 import { Box } from "@mui/material";
 import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';

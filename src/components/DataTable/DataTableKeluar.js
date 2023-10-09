@@ -32,32 +32,19 @@ function DataTableKeluar() {
             </div>
             <table className=''>
                 <thead className='w-[66.5rem] h-[3.5rem] bg-[#F3F3F3]'>
-                    <tr>
-                        <td className='w-[1.5rem] pl-2 border-l-2 border-y-2 border-y-[#E8E8E8]'>
-                            No
-                        </td>
-                        <td className='w-[58.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>
-                            Nama Asset
-                        </td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>
-                            Tag Number
-                        </td>
-                        <td className='w-[60.625rem] border-y-2 border-[#e8e8e8]'>
-                            Penanggung Jawab Aset
-                        </td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>
-                            Lokasi Aset
-                        </td>
-                        <td className='w-[88.625rem] border-y-2 border-[#e8e8e8]'>
-                            Kondisi Aset Saat Dikembalikan
-                        </td>
-                        <td className='w-[69.625rem] border-y-2 border-[#e8e8e8]'>
-                           Tanggal Pengembalian
-                        </td>
-                        <td className='w-[98.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>
-                            Foto Aset
-                        </td>
-                    </tr>
+                <tr>
+                    <th className='px-4 py-2 border-l-2 border-y-2 border-y-[#E8E8E8] text-left'>No</th>
+                    <th className='px-2 py-2 border-y-2 border-[#e8e8e8] text-left'>Nama Aset</th>
+                    <th className='px-4 py-2 border-y-2 border-[#e8e8e8] text-left'>Tag Number</th>
+                    <th className='px-4 py-2 border-y-2 border-[#e8e8e8] text-left'>Merek</th>
+                    <th className='py-2 border-y-2 border-[#e8e8e8] text-left'>Tipe</th>
+                    <th className='px-2 py-2 border-y-2 border-[#e8e8e8] text-left w-[8rem]'>Nomor Seri</th>
+                    <th className='px-2 py-2 border-y-2 border-[#e8e8e8] text-left'>Penanggung Jawab Aset</th>
+                    <th className='px-2 py-2 border-y-2 border-[#e8e8e8] text-left w-[8rem]'>Lokasi Aset</th>
+                    <th className='px-2 py-2 border-y-2 border-[#e8e8e8] text-left'>Kondisi Aset</th>
+                    <th className='px-2 py-2 border-y-2 border-[#e8e8e8] text-left'>Tanggal Peminjaman</th>
+                    <th className='px-2 py-2 border-r-2 border-y-2 border-[#e8e8e8] text-left'>Tujuan Peminjaman</th>
+                </tr>
                 </thead>
                 <tbody>
                     {records.map((item, id) => (
