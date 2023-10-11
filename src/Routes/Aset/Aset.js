@@ -1,10 +1,10 @@
 import React from "react";
 import { Box } from "@mui/material";
 import Sidebar from "../../components/Sidebar/Sidebar/Sidebar";
-import HomePage from "../../pages/HomePage/HomePage";
 import AppBar from "../../components/AppBar/AppBar";
+import AsetPage from '../../pages/AsetPage/AsetPage';
 
-export default function Home () {
+export default function CardAset () {
     return(
         <Box className="flex h-full">
             <Sidebar className="fixed"/>
@@ -13,7 +13,7 @@ export default function Home () {
                     <AppBar/>
                 </Box>
                 <Box className="mt-3">
-                    <HomePage/>
+                    <AsetPage/>
                 </Box>
             </Box>
         </Box>
