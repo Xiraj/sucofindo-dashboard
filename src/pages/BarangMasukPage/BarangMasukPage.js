@@ -4,7 +4,7 @@ import CardBarangMasuk from "../../components/CardBarangMasuk";
 export default function BarangMasukPage () {
     return(
         <div className="max-h-full">
-            <div className="relative top-[2rem]">
+            <div className="relative top-[3rem]">
               <CardBarangMasuk/>
             </div>
             <div className="flex justify-between mt-[1rem] ml-[50rem] mb-[2rem] relative right-16">

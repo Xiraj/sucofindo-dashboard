@@ -26,7 +26,6 @@ export default function CardHome () {
         { value: 407, label: 'Total Aset', color: '#4E73DF' },
         { value: 10, label: 'Aset Keluar', color: '#FF9839' },
       ];
-      
       const size = {
         width: 500,
         height: 500,
