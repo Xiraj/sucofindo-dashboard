@@ -7,12 +7,12 @@ import BarangKeluarPage from "../../pages/BarangKeluarPage/BarangKeluarPage";
 export default function BarangKeluar () {
     return(
         <Box className="flex w-full">
-            <Sidebar className="fixed"/>
+            <Sidebar/>
             <Box className="w-full">
-                <Box className="z-10 fixed w-full h-[3.7rem]">
+                <Box className="h-[3.75rem]">
                     <AppBar/>
                 </Box>
-                <Box className="mt-3">
+                <Box className="">
                     <BarangKeluarPage/>
                 </Box>
             </Box>
