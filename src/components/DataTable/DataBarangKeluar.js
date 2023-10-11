@@ -15,7 +15,7 @@ function DataTableKeluar() {
         axios.get('https://sima-rest-api.vercel.app/api/v1/data/aset')
           .then((response) => {
             setData(response.data.data);
-            console.log(response.data.data) // Mengganti 'Data' dengan hasil dari API
+            console.log(response.data.data)
           })
           .catch((error) => {
             console.error("Error fetching data:", error);
