@@ -8,7 +8,7 @@ export default function TotalAsetPage () {
     return(
         <Box className="w-full h-full pt-8">
             <Box className={`${ open ? 'pt-[2rem] ' : 'justify-center items-center' }`}>
-                <CardAset />
+                <CardAset/>
             </Box>
             <Box className={`${ open ? 'pb-[2rem] ' : 'justify-center items-center' }`}>
                 <CardPengguna/>
