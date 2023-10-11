@@ -4,6 +4,7 @@ import { RiFolderUploadFill } from "react-icons/ri";
 import {  useSpring, animated  } from 'react-spring';
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
 import { Box } from "@mui/material";
+import { Link } from 'react-router-dom'
 import axios from "axios";
 
 function Number({ n }) {
@@ -11,7 +12,7 @@ function Number({ n }) {
         from: { number: 0 },
         number: n,
         delay: 250,
-        config: { mass: 1, tension: 20, friction: 10 }, // Corrected 'frinction' to 'friction'
+        config: { mass: 1, tension: 20, friction: 10 },
     });
 
     return (
@@ -49,44 +50,55 @@ export default function CardAset () {
             <h1 className="ml-[2.5rem] pt-[1.5rem] text-[2rem] ">Dashboard</h1>
             <Box className="flex justify-between">
                 <Box className="flex flex-col gap-6 ml-[2.5rem] pt-[2.2rem]">
-                    <Box className="w-[22.25rem] h-[12.5rem] rounded-[1rem] bg-main-color ">
-                        <Box className="bg-white w-[3rem] h-[3rem] rounded-[0.5rem] ml-8 mt-5">
-                            <Box className="ml-[0.5rem] pt-[0.5rem]">
-                                <FaFolder color="#4E73DF" size={30}/>
-                                <Box className="flex text-white text-[4rem] mr-[14rem] pt-[0.9rem] font-semibold">
-                                    <Box>
-                                        <Number n={itemCount} />
+                    <Link to='/Total-Aset'>
+                        <Box className="w-[22.25rem] h-[12.5rem] rounded-[1rem] bg-main-color cursor-pointer">
+                            <Box className="ml-7 mt-2">
+                                <Box className="ml-[0.5rem] pt-[1rem]">
+                                    <Box className="bg-white w-[3rem] h-[3rem] rounded-[0.5rem] mt-2">
+                                        <FaFolder color="#4E73DF" className='relative left-2 top-2' size={30}/>
                                     </Box>
-                                    <Box>
-                                        <h1 className="text-white text-[1.5rem] w-[7.25rem] ml-[0.75rem] pt-10 font-medium">Total Aset</h1>
-                                    </Box>
-                                </Box>
-                            </Box>
-                        </Box>
-                    </Box>
-                    <Box className="w-[22.25rem] h-[12.5rem] rounded-[1rem] bg-[#FF9839] ">
-                        <Box className="bg-white w-[3rem] h-[3rem] rounded-[0.5rem] ml-8 mt-5">
-                            <Box className="ml-[0.5rem] pt-[0.5rem]">
-                                <RiFolderUploadFill color="#FF9839" size={30}/>
-                                <Box className="flex text-white text-[4rem] mr-[14rem] pt-[0.9rem] font-semibold">
-                                    <Box>
-                                        <Number n={borrowedAssetsCount}/>
-                                    </Box>
-                                    <Box>
-                                        <h1 className="text-white text-[1.5rem] w-[8.4rem] ml-[0.75rem] pt-10 font-medium">Aset Keluar</h1>
+                                    <Box className="flex text-white text-[4rem] mr-[14.5rem] pt-[0.2rem] font-semibold">
+                                        <Box>
+                                            <Number n={itemCount} />
+                                        </Box>
+                                        <Box>
+                                            <h1 className="text-white text-[1.5rem] w-[7.25rem] ml-[0.75rem] pt-10 font-medium">Total Aset</h1>
+                                        </Box>
                                     </Box>
                                 </Box>
                             </Box>
                         </Box>
-                    </Box>
+                    </Link>
+                    <Link to='/Barang-Keluar'>
+                        <Box className="w-[22.25rem] h-[12.5rem] rounded-[1rem] bg-[#FF9839] cursor-pointer">
+                            <Box className="ml-7 mt-2">
+                                <Box className="ml-[0.5rem] pt-[1rem]">
+                                    <Box className="bg-white w-[3rem] h-[3rem] rounded-[0.5rem] mt-2">
+                                        <RiFolderUploadFill color="#FF9839" className='relative left-2 top-2' size={30}/>
+                                    </Box>
+                                    <Box className="flex text-white text-[4rem] mr-[14.5rem] pt-[0.2rem] font-semibold">
+                                        <Box>
+                                            <Number n={borrowedAssetsCount} />
+                                        </Box>
+                                        <Box>
+                                            <h1 className="text-white text-[1.5rem] w-[9.25rem] ml-[0.75rem] pt-10 font-medium">Aset Keluar</h1>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Link>
                 </Box>
                 <PieChart
                     className="cursor-pointer"
                     series={[
                         {
-                        arcLabel: (item) => `${item.label} (${item.value})`,
-                        arcLabelMinAngle: 45,
-                        data: [{ label: 'Total Aset', value: itemCount }],
+                          arcLabel: (item) => `${item.label} (${item.value})`,
+                          arcLabelMinAngle: 45,
+                          data: [
+                              { label: 'Total Aset', value: itemCount, color: '#4E73DF'},
+                              { label: 'Aset Keluar', value: borrowedAssetsCount,  color: '#FF9839' },
+                          ],
                         },
                     ]}
                     sx={{
