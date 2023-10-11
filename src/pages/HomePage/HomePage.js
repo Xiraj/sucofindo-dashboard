@@ -3,7 +3,7 @@ import { Box } from "@mui/material";
 import CardAset from "../../components/CardAset/CardAset";
 import CardPengguna from "../../components/CardPengguna/CardPengguna";
 
-export default function TotalAsetPage () {
+export default function HomePage () {
     const [open] = useState(true);
     return(
         <Box className="w-full h-full pt-8">

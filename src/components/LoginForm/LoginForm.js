@@ -30,7 +30,7 @@ export default function LoginForm () {
                     { showPass? <AiFillEye color="c4c4c4" size={24} /> : <AiFillEyeInvisible color="c4c4c4" size={24} /> }
                   </span>
                 </div>
-                <Link to='/Total-Aset'>
+                <Link to='/Home'>
                   <button className='bg-main-color w-[27rem] h-[3.25rem] mt-[2.5rem] rounded-md text-white font-semibold'>
                     Masuk
                   </button>
