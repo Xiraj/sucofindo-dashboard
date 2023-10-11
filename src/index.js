@@ -2,7 +2,8 @@ import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import TotalAset from './Routes/TotalAset/TotalAset';
+import Aset from './Routes/Aset/Aset';
+import Home from './Routes/Home/Home';
 import BarangMasuk from './Routes/BarangMasuk/BarangMasuk';
 import BarangKeluar from './Routes/BarangKeluar/BarangKeluar';
 import DetailBarangMasuk from './Routes/DetailBarangMasuk';
@@ -15,7 +16,8 @@ root.render(
     <Routes>
       <Route path='/' element={<Login/>}/>
       <Route path='/Login' element={<Login/>}/>
-      <Route path='/Total-Aset' element={<TotalAset/>}/>
+      <Route path='/Home' element={<Home/>}/>
+      <Route path='/Total-Aset' element={<Aset/>}/>
       <Route path='/Barang-Masuk' element={<BarangMasuk/>}/>
       <Route path='/Barang-Keluar' element={<BarangKeluar/>}/>
       <Route path='/Detail-Barang-Masuk' element={<DetailBarangMasuk/>}/>
