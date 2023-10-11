@@ -9,10 +9,10 @@ export default function TotalAset () {
         <Box className="flex h-full">
             <Sidebar className="fixed"/>
             <Box className="w-full">
-                <Box className="h-[3.7rem]">
+                <Box className="z-10 fixed w-full h-[3.7rem]">
                     <AppBar/>
                 </Box>
-                <Box className="">
+                <Box className="mt-3 ">
                     <TotalAsetPage/>
                 </Box>
             </Box>

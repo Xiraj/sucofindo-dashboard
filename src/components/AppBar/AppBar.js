@@ -15,7 +15,7 @@ import { Badge } from '@mui/material';
 const settings = ['Keluar'];
 
 function UserAppBar() {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleOpenNavMenu = (event) => {

@@ -25,11 +25,6 @@ function DataTableKeluar() {
     }
     return (
         <div className='w-full md:w-[107.5rem] mx-auto overflow-y-auto overflow-x-auto md:mr-[2.5rem]'>
-            <div>
-                <input type='text' placeholder='Cari restoran atau lokasi' className=''>
-                    
-                </input>
-            </div>
             <table className=''>
                 <thead className='w-[66.5rem] h-[3.5rem] bg-[#F3F3F3]'>
                 <tr>
