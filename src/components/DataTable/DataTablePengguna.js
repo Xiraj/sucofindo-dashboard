@@ -81,7 +81,7 @@ export default function DataTablePengguna() {
                             Email
                         </td>
                         <td className='w-[20.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>
-                            Unit
+                            Tanggal Terdaftar 
                         </td>
                     </tr>
                 </thead>
@@ -91,7 +91,9 @@ export default function DataTablePengguna() {
                             <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+firstIndex+1}</td>
                             <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.username}</td>
                             <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.email}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>{item.unit}</td>
+                            <td className='w-[18.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>
+                                {new Date(item.createdAt).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+                             </td>
                         </tr>
                     ))}
                 </tbody>
@@ -122,7 +124,7 @@ export default function DataTablePengguna() {
                         {pageNumbers.map((number) => (
                             <li className={`cursor-pointer page-link ${currentPage === number ? 'active' : ''}`} key={number}>
                                 <a 
-                                    className='page-item text-[1.1rem] m-4'
+                                    className='hover:border-main-color hover:rounded-xl hover:border-2 hover:w-2 page-item hover:text-center text-[1.1rem] p-2'
                                     onClick={() => handlePageChange(number)}
                                 >
                                     {number}

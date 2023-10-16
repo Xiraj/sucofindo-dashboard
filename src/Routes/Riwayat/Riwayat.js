@@ -6,13 +6,13 @@ import { Box } from "@mui/material";
 
 export default function Riwayat () {
     return(
-        <Box className="flex w-full">
-            <Sidebar/>
+        <Box className="flex h-full">
+            <Sidebar className="fixed"/>
             <Box className="w-full">
-                <Box className="h-[3.75rem]">
+                <Box className="z-10 fixed w-full h-[3.7rem]">
                     <AppBar/>
                 </Box>
-                <Box className="relative bottom-5">
+                <Box className="pt-12">
                     <RiwayatPage/>
                 </Box>
             </Box>
