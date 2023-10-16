@@ -5,9 +5,9 @@ import CardAset from "../../components/CardAset/CardAset";
 export default function HomePage () {
     const [open] = useState(true);
     return(
-        <Box className="bg-[#f3f3f3] w-full h-screen ">
-            <Box className="relative top-20">
-                <CardAset/>
+        <Box className="w-full h-full pt-8">
+            <Box className={`${ open ? 'pt-[2rem] ' : 'justify-center items-center' }`}>
+                <CardAset />
             </Box>
         </Box>
     );

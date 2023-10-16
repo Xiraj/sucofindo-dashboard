@@ -55,13 +55,13 @@ export default function BasicTabs() {
           <Tab label="Ditolak" {...a11yProps(2)} />
         </Tabs>
       </Box>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={0}>
+      <CustomTabPanel className='md:w-[60rem] md:h-[60rem] overflow-x-auto pr-9 pt-2' value={value} index={0}>
         <DataBarangMasuk/>
       </CustomTabPanel>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={1}>
+      <CustomTabPanel className='md:w-[60rem] md:h-[60rem] overflow-x-auto pr-9 pt-2' value={value} index={1}>
         <DataBarangMasuk/>
       </CustomTabPanel>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={2}>
+      <CustomTabPanel className='md:w-[60rem] md:h-[60rem] overflow-x-auto pr-9 pt-2' value={value} index={2}>
         <DataBarangMasuk/>
       </CustomTabPanel>
     </Box>
