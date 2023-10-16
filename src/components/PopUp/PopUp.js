@@ -22,6 +22,7 @@ const PopupForm = ({ isOpen, onClose, onSubmit }) => {
         console.error('Error fetching data:', error);
     }
 };
+
 useEffect(() => {
     postData();
 }, []);
@@ -62,7 +63,7 @@ useEffect(() => {
             </div>
             <div className='grid justify-items-stretch my-4'>
                 <div className='flex justify-between'>
-                    <img className='w-[14rem] h-[9rem]' src={Logo}/>
+                    <img alt="logo" className='w-[14rem] h-[9rem]' src={Logo}/>
                 </div>
                 <div className='flex justify-end relative bottom-7'>
                     <h1 className='w-[12rem] h-[2rem] bg-main-color rounded-xl text-center pt-1 text-white'>
