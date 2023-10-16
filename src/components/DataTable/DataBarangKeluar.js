@@ -116,7 +116,7 @@ export default function DataTableKeluar() {
                                 <option value={20}>20</option>
                             </select>
                             <p className='ml-4'>
-                                Menampilkan Riwayat Barang Masuk
+                                Menampilkan Riwayat Barang Keluar
                             </p>
                         </label>
                     </div>

@@ -5,8 +5,8 @@ import LoginForm from '../../components/LoginForm/LoginForm';
 
 export default function Login () {
   return (
-    <div>
-        <div className="bg-white flex flex-row">
+    <div className="bg-white min-h-screen">
+        <div className="flex flex-row">
             <div className="mt-[12.5rem] ml-[2.125rem]">
                 <img alt="LoginImage" src={imageLogin} />
             </div>
