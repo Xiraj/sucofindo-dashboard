@@ -33,9 +33,9 @@ export default function DataTableKeluar() {
         getData();
     }, []);
 
-     const Filter = (event) => {
+    const Filter = (event) => {
         const searchTerm = event.target.value.toLowerCase();
-        const filtered = data.filter((item) => item.username.toLowerCase().includes(searchTerm));
+        const filtered = data.filter((item) => item.nama_alat.toLowerCase().includes(searchTerm));
         setFilteredData(filtered);
         setCurrentPage(1); 
     }
@@ -67,8 +67,8 @@ export default function DataTableKeluar() {
                     <BsSearch className='relative right-7 top-2' size={15}/>
                 </div>
             </div>
-            <table className='font-bold '>
-                <thead className='w-[86.5rem] h-[3.5rem] bg-[#F3F3F3]'>
+            <table>
+                <thead className='w-[86.5rem] h-[3.5rem] font-bold bg-[#F3F3F3]'>
                     <tr>
                         <th className='w-[18.625rem] pl-3 py-2 border-l-2 border-y-2 border-y-[#E8E8E8] text-left'>No</th>
                         <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nama Aset</th>
