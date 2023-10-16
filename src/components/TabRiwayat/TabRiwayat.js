@@ -55,10 +55,10 @@ export default function BasicTabs() {
           <Tab label="Barang Keluar" {...a11yProps(1)} />
         </Tabs>
       </Box>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-9 pt-7' value={value} index={0}>
+      <CustomTabPanel className='md:w-[60rem] overflow-x-auto' value={value} index={0}>
         <DataTableMasuk/>
       </CustomTabPanel>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={1}>
+      <CustomTabPanel className='md:w-[60rem] overflow-x-auto' value={value} index={1}>
         <DataTableKeluar/>
       </CustomTabPanel>
     </Box>

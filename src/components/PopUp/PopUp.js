@@ -42,7 +42,6 @@ useEffect(() => {
     }
   };
   
-
   return (
     <div className={`fixed z-10 inset-0 overflow-y-auto ${isOpen ? '' : 'hidden'}`}>
       <div className="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -54,11 +53,18 @@ useEffect(() => {
         </span>
         <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-top sm:max-w-3xl sm:w-full sm:p-6">
           <form onSubmit={handleSubmit}>
+            <div className='flex justify-end'>
+              <button className='w-8 border-2 border-zinc-700 rounded-xl'>
+                <h1 className='text-[1.2rem]'>
+                  X
+                </h1>
+              </button>
+            </div>
             <div className='grid justify-items-stretch my-4'>
                 <div className='flex justify-between'>
                     <img className='w-[14rem] h-[9rem]' src={Logo}/>
                 </div>
-                <div className='flex justify-end'>
+                <div className='flex justify-end relative bottom-7'>
                     <h1 className='w-[12rem] h-[2rem] bg-main-color rounded-xl text-center pt-1 text-white'>
                         Form Tambah Aset
                     </h1>
