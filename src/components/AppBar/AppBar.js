@@ -14,13 +14,15 @@ import { Badge } from '@mui/material';
 
 const settings = ['Keluar'];
 
-function UserAppBar() {
-  const [setAnchorElNav] = React.useState(null);
+function UserAppBar({ username }) {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  console.log('apa',username)
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -48,8 +50,10 @@ function UserAppBar() {
               </MenuItem>
             </Box>
             <Tooltip title="Apakah kamu sudah seleai menggunakan dashboard?">
-              <IconButton  onClick={handleOpenUserMenu} sx={{ position: 'relative', left: '53.8rem' }}> 
-                <h1 className='pr-2 text-[1rem]'>Admin Dashboard</h1>
+              <IconButton onClick={handleOpenUserMenu} sx={{ position: 'relative', left: '53.8rem' }}>
+                {username && (
+                  <h1 className='pr-2 text-[1rem]'>{username}</h1>
+                )}
                 <FaUserCircle color='#4E73DF' size={30}/>
               </IconButton>
             </Tooltip>
