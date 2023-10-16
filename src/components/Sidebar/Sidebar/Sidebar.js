@@ -7,7 +7,7 @@ import { FaFolder, FaHome } from 'react-icons/fa';
 import { RiFolderDownloadFill, RiFolderUploadFill, RiFolderHistoryFill } from 'react-icons/ri'
 
 export default function Sidebar () {
-  const userRole = 'admin';
+  const userRole = 'superAdmin';
   const [open, setOpen] = useState(true);
   const getMenuItems = () => {
     const menuItemsByRole = {
@@ -22,13 +22,13 @@ export default function Sidebar () {
                     className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
                     color='white' size={`${ open ? 20 : 26 }`} 
             />, 
-            to: '/Barang-Masuk', label: 'Persetujuan Peminjaman'
+            to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
         },
         {   icon: <RiFolderUploadFill
                     className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
                     color='white' size={`${ open ? 20 : 26 }`} 
             />, 
-            to: '/Barang-Keluar', label: 'Persetujuan Pengembalian'
+            to: '/Barang-Masuk', label: 'Persetujuan Pengembalian'
         },
         {   icon: <RiFolderHistoryFill
                 className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
