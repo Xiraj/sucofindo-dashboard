@@ -7,76 +7,39 @@ import { FaFolder, FaHome } from 'react-icons/fa';
 import { RiFolderDownloadFill, RiFolderUploadFill, RiFolderHistoryFill } from 'react-icons/ri'
 
 export default function Sidebar () {
-  const userRole = 'superAdmin';
   const [open, setOpen] = useState(true);
-  const getMenuItems = () => {
-    const menuItemsByRole = {
-      admin: [
-        { icon: <FaHome 
-          className={`${!open && 'cursor-pointer w-[8rem]'}`} 
-          color='white' size={`${ open ? 20 : 24 }`} 
+  const menuItems = [
+    { icon: <FaHome 
+        className={`${!open && 'cursor-pointer w-[8rem]'}`} 
+        color='white' size={`${ open ? 20 : 24 }`} 
+      />, 
+      to: '/Home', label: 'Home'
+    },
+    {   icon: <FaFolder 
+                className={`${!open && 'cursor-pointer relative top-[2rem] ml-[1rem] w-[8rem]'}`} 
+                color='white' size={`${ open ? 20 : 24 }`} 
         />, 
-        to: '/Home', label: 'Home'
-        },
-        {   icon: <RiFolderDownloadFill
-                    className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
-        },
-        {   icon: <RiFolderUploadFill
-                    className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Barang-Masuk', label: 'Persetujuan Pengembalian'
-        },
-        {   icon: <RiFolderHistoryFill
-                className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
-                color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Riwayat', label: 'History'
-        },
-      ],
-      superAdmin: [
-        { icon: <FaHome 
-          className={`${!open && 'cursor-pointer w-[8rem]'}`} 
-          color='white' size={`${ open ? 20 : 24 }`} 
+        to: '/Total-Aset', label: 'Total Aset Tersedia'
+    },
+    {   icon: <RiFolderUploadFill
+          className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
+          color='white' size={`${ open ? 20 : 26 }`} 
         />, 
-        to: '/Home', label: 'Home'
-        },
-        {   icon: <FaFolder 
-                    className={`${!open && 'cursor-pointer relative top-[2rem] ml-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 24 }`} 
-            />, 
-            to: '/Total-Aset', label: 'Total Aset Tersedia'
-        },
-        {   icon: <RiFolderDownloadFill
-                    className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Barang-Masuk', label: 'Persetujuan Peminjaman'
-        },
-        {   icon: <RiFolderUploadFill
-                    className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Barang-Keluar', label: 'Persetujuan Pengembalian'
-        },
-        {   icon: <RiFolderHistoryFill
-                className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
+        to: '/Barang-Masuk', label: 'Persetujuan Pengembalian'
+    },
+    {   icon: <RiFolderDownloadFill
+                className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
                 color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Riwayat', label: 'History'
-        },
-      ],
-    };
-
-    return menuItemsByRole[userRole] || [];
-  };
-
-  
-  const menuItems = getMenuItems();
-
+        />, 
+        to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
+    },
+    {   icon: <RiFolderHistoryFill
+            className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
+            color='white' size={`${ open ? 20 : 26 }`} 
+        />, 
+        to: '/Riwayat', label: 'History'
+    },
+  ];
   return (
     <aside className='flex z-10'>
       <Box className={`${ open ? "w-[16.8rem]" : "w-[8rem]" } duration-300 bg-main-color`}>

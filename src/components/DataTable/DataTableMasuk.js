@@ -33,9 +33,9 @@ export default function DataTableMasuk() {
         getData();
     }, []);
 
-     const Filter = (event) => {
+    const Filter = (event) => {
         const searchTerm = event.target.value.toLowerCase();
-        const filtered = data.filter((item) => item.username.toLowerCase().includes(searchTerm));
+        const filtered = data.filter((item) => item.nama_alat.toLowerCase().includes(searchTerm));
         setFilteredData(filtered);
         setCurrentPage(1); 
     }
@@ -57,7 +57,7 @@ export default function DataTableMasuk() {
     
     return (
         <div className='w-full md:w-[107.5rem] mx-auto overflow-y-auto overflow-x-auto md:mr-[2.5rem]'>
-            <div className='flex justify-end mb-4'>
+            <div className='flex justify-start mt-4 mb-4'>
                 <div className='flex'>
                     <input 
                         className='bg-transparent border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none ' 
@@ -132,7 +132,7 @@ export default function DataTableMasuk() {
                             .map((number) => (
                                 <li className={`cursor-pointer page-link ${currentPage === number ? 'active' : ''}`} key={number}>
                                     <a 
-                                        className='page-item text-[1.1rem] m-4'
+                                        className='hover:border-2 hover:border-main-color rounded-xl hover:w-4 page-item text-[1.1rem] p-2'
                                         onClick={() => handlePageChange(number)}
                                     >
                                         {number}
