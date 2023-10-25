@@ -7,14 +7,6 @@ export default function BarangMasukPage () {
             <div className="relative top-[1 rem]">
               <CardBarangKeluar/>
             </div>
-            <div className="flex justify-end mr-14 py-3">
-                <button className='bg-[#FF0404] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold mr-[2rem]'>
-                    Tolak
-                </button>
-                <button className='bg-[#2AC43A] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold'>
-                    Terima
-                </button>
-            </div>
         </div>
     );
 }

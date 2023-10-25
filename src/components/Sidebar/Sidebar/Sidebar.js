@@ -18,55 +18,63 @@ export default function Sidebar () {
         />, 
         to: '/Home', label: 'Home'
         },
-        {   icon: <RiFolderDownloadFill
+        {   
+          icon: <RiFolderDownloadFill
                     className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
                     color='white' size={`${ open ? 20 : 26 }`} 
             />, 
             to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
         },
-        {   icon: <RiFolderUploadFill
+        {   
+          icon: <RiFolderUploadFill
                     className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
                     color='white' size={`${ open ? 20 : 26 }`} 
             />, 
             to: '/Barang-Masuk', label: 'Persetujuan Pengembalian'
         },
-        {   icon: <RiFolderHistoryFill
-                className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
-                color='white' size={`${ open ? 20 : 26 }`} 
+        {   
+          icon: <RiFolderHistoryFill
+                  className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
+                  color='white' size={`${ open ? 20 : 26 }`} 
             />, 
-            to: '/Riwayat', label: 'History'
+            to: '/Riwayat', label: 'Riwayat'
         },
       ],
       superAdmin: [
-        { icon: <FaHome 
-          className={`${!open && 'cursor-pointer w-[8rem]'}`} 
-          color='white' size={`${ open ? 20 : 24 }`} 
+        { 
+          icon: <FaHome 
+                  className={`${!open && 'cursor-pointer w-[8rem]'}`} 
+                  color='white' size={`${ open ? 20 : 24 }`} 
         />, 
         to: '/Home', label: 'Home'
         },
-        {   icon: <FaFolder 
-                    className={`${!open && 'cursor-pointer relative top-[2rem] ml-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 24 }`} 
-            />, 
+        {   
+          icon: <FaFolder 
+                  className={`${!open && 'cursor-pointer relative top-[2rem] ml-[1rem] w-[8rem]'}`} 
+                  color='white' size={`${ open ? 20 : 24 }`} 
+          />, 
             to: '/Total-Aset', label: 'Total Aset Tersedia'
         },
-        {   icon: <RiFolderDownloadFill
-                    className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Barang-Masuk', label: 'Persetujuan Peminjaman'
+        {   
+          icon: <RiFolderDownloadFill
+                  className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
+                  color='white' size={`${ open ? 20 : 26 }`} 
+          />, 
+            to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
         },
-        {   icon: <RiFolderUploadFill
-                    className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Barang-Keluar', label: 'Persetujuan Pengembalian'
+        {   
+          icon: <RiFolderUploadFill
+                  className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
+                  color='white' size={`${ open ? 20 : 26 }`} 
+          />, 
+            to: '/Barang-Masuk', label: 'Persetujuan Pengembalian'
         },
-        {   icon: <RiFolderHistoryFill
-                className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
-                color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Riwayat', label: 'History'
+        {   
+          icon: <RiFolderHistoryFill
+                  className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
+                  color='white' size={`${ open ? 20 : 26 }`} 
+          />, 
+            to: '/Riwayat', label: 'Riwayat'
         },
       ],
     };

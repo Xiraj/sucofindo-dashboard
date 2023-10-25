@@ -1,15 +1,84 @@
-import React from "react";
-import CardDataBarangMasuk from "../../components/CardDataBarangMasuk";
-import CardStatusBarangMasuk from "../../components/CardStatusBarangMasuk";
+import { useState, useEffect } from "react";
+import ImageView from "../../components/ImageView";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function DetailBarangMasukPage () {
+  const { _id } = useParams([]);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/peminjaman/${_id}`);
+        setData(response.data.peminjaman);
+        console.log("apaaa", response.data.peminjaman)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    getData();
+  }, [_id]);
     return(
         <div className="max-h-full">
             <div className="relative top-[4rem]">
-                <CardDataBarangMasuk/>
+            <div className="bg-white max-w-6xl max-h-full ml-[2.5rem] rounded-md">
+              <p className="ml-[2.5rem] pt-[1.5rem] text-[2rem] font-Montserrat font-semibold">Data Aset</p>
+              <div className=" flex flex-row ml-[2.5rem] mt-[2.2rem]">
+              {Object.keys(data).length > 0 && (
+                <div className="mb-[2.5rem]" key={data._id}>
+                  <p className="text-[1.25rem] font-semibold text-[#515151] ">Nama Alat</p>
+                    <div className="py-3 px-3 text-[#515151] bg-[#C4C4C4] border rounded-lg w-[27rem] text-[1rem] mt-4">
+                        <p>{data.id_aset.nama_alat}</p>
+                    </div>
+                    <p className="text-[1.25rem] font-semibold text-[#515151] mt-[2.2rem]">Tag Number</p>
+                    <div className="py-3 px-3 text-[#515151] bg-[#C4C4C4] border rounded-lg w-[27rem] text-[1rem] mt-4">
+                        <p>{data.id_aset.tag_number}</p>
+                    </div>
+                  </div>
+              )}
+              {Object.keys(data).length > 0 && (
+                  <div className="ml-[5rem]" key={data._id}>
+                    <p className="text-[1.25rem] font-semibold text-[#515151] ">Penanggung Jawab Alat</p>
+                      <div className="py-3 px-3 text-[#515151] bg-[#C4C4C4] border rounded-lg w-[27rem] text-[1rem] mt-4">
+                        <p>{data.id_aset.penanggung_jawab}</p>
+                      </div>
+                  </div>
+              )}
+                </div>
+              </div>
             </div>
             <div className="mt-[8.5rem]">
-                <CardStatusBarangMasuk/>
+            <div className="bg-white max-w-6xl max-h-full ml-[2.5rem] rounded-md ">
+          <p className="ml-[2.5rem] pt-[1.5rem] text-[2rem] font-Montserrat font-semibold">Status Aset</p>
+          <div className=" flex flex-row ml-[2.5rem] mt-[2.2rem]">
+          {Object.keys(data).length > 0 && (
+            <div className="mb-[2.5rem]" key={data._id}>
+              <p className="text-[1.25rem] font-semibold text-[#515151] ">Lokasi Aset</p>
+                <div className="py-3 px-3 text-[#515151] bg-[#C4C4C4] border rounded-lg w-[27rem] text-[1rem] mt-4">
+                    <p>{data.lokasi}</p>
+                </div>
+                <p className="text-[1.25rem] font-semibold text-[#515151] mt-[2.2rem]">Kondisi Aset Saat Dikembalikan</p>
+                <div className="py-3 px-3 text-[#515151] bg-[#C4C4C4] border rounded-lg w-[27rem] text-[1rem] mt-4">
+                    <p>{data.kondisi_aset}</p>
+                </div>
+              </div>
+          )}
+          {Object.keys(data).length > 0 && (
+              <div className="ml-[5rem]" key={data._id}>
+                <p className="text-[1.25rem] font-semibold text-[#515151] ">Tanggal Pengembalian</p>
+                  <div className="py-3 px-3 text-[#515151] bg-[#C4C4C4] border rounded-lg w-[27rem] text-[1rem] mt-4">
+                    <p>{data.tanggal_pengembalian}</p>
+                  </div>
+									<p className="text-[1.25rem] font-semibold text-[#515151] mt-[2.2rem]">Foto Aset</p>
+										<div className="bg-white p-4 border-2 rounded-lg w-[27rem] h-[20rem] overflow-y-scroll mb-[2rem] mt-4">
+											<ImageView imageUrl="https://images.unsplash.com/photo-1566895291281-ea63efd4bdbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8OSUzQTE2fGVufDB8fDB8fHww&w=1000&q=80" />
+										</div>
+              </div>
+          )}
+          </div>
+        </div>
             </div>
             <div className="flex flex-row mt-[1rem] ml-[50rem] mb-[2rem]">
                 <button className='bg-[#FF0404] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold mr-[2rem]'>
