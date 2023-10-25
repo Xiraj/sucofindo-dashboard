@@ -33,9 +33,9 @@ export default function DataTableKeluar() {
         getData();
     }, []);
 
-     const Filter = (event) => {
+    const Filter = (event) => {
         const searchTerm = event.target.value.toLowerCase();
-        const filtered = data.filter((item) => item.username.toLowerCase().includes(searchTerm));
+        const filtered = data.filter((item) => item.nama_alat.toLowerCase().includes(searchTerm));
         setFilteredData(filtered);
         setCurrentPage(1); 
     }
@@ -56,7 +56,7 @@ export default function DataTableKeluar() {
     }
     return (
         <div className='w-full md:w-[127.5rem] mx-auto overflow-y-auto overflow-x-auto md:mr-[2.5rem]'>
-             <div className='flex justify-end mb-4'>
+             <div className='flex justify-start mt-4 mb-4'>
                 <div className='flex'>
                     <input 
                         className='bg-transparent border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none ' 
@@ -67,8 +67,8 @@ export default function DataTableKeluar() {
                     <BsSearch className='relative right-7 top-2' size={15}/>
                 </div>
             </div>
-            <table className='font-bold '>
-                <thead className='w-[86.5rem] h-[3.5rem] bg-[#F3F3F3]'>
+            <table>
+                <thead className='w-[86.5rem] h-[3.5rem] font-bold bg-[#F3F3F3]'>
                     <tr>
                         <th className='w-[18.625rem] pl-3 py-2 border-l-2 border-y-2 border-y-[#E8E8E8] text-left'>No</th>
                         <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nama Aset</th>
@@ -131,7 +131,7 @@ export default function DataTableKeluar() {
                             .map((number) => (
                                 <li className={`cursor-pointer page-link ${currentPage === number ? 'active' : ''}`} key={number}>
                                     <a 
-                                        className='page-item text-[1.1rem] m-4'
+                                        className='hover:border-2 hover:border-main-color rounded-xl hover:w-4 page-item text-[1.1rem] p-2'
                                         onClick={() => handlePageChange(number)}
                                     >
                                         {number}

@@ -30,17 +30,18 @@ export default function DataTableKeluar() {
             console.error('Error fetching data:', error);
         }
     };
+    
+    const Filter = (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        const filtered = data.filter((item) => item.id_aset.nama_alat.toLowerCase().includes(searchTerm));
+        setFilteredData(filtered);
+        setCurrentPage(1);
+    }
 
     useEffect(() => {
         getData();
     }, []);
 
-     const Filter = (event) => {
-        const searchTerm = event.target.value.toLowerCase();
-        const filtered = data.filter((item) => item.username.toLowerCase().includes(searchTerm));
-        setFilteredData(filtered);
-        setCurrentPage(1); 
-    }
 
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= totalPages) {

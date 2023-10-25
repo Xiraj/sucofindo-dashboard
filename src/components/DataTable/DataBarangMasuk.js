@@ -16,7 +16,6 @@ export default function DataTableMasuk() {
     const totalRecords = Array.isArray(filteredData) ? filteredData.length : 0;
     const totalPages = Math.ceil(totalRecords / recordPerPage);
 
-
     const getData = async () => {
         try {
             const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/listpinjam')
@@ -38,14 +37,9 @@ export default function DataTableMasuk() {
 
     const Filter = (event) => {
         const searchTerm = event.target.value.toLowerCase();
-        const filtered = data.filter((item) => {
-            if (item && item.nama_alat) {
-                return item.nama_alat.toLowerCase().includes(searchTerm);
-            }
-            return false;
-        });
+        const filtered = data.filter((item) => item.nama_alat.toLowerCase().includes(searchTerm));
         setFilteredData(filtered);
-        setCurrentPage(1);
+        setCurrentPage(1); 
     }
 
     const handlePageChange = (newPage) => {
@@ -56,7 +50,7 @@ export default function DataTableMasuk() {
     const handleItemsPerPageChange = (event) => {
         const newItemsPerPage = parseInt(event.target.value, 10);
         setRecordPerPage(newItemsPerPage);
-        setCurrentPage(1);
+        setCurrentPage(1); // Reset to the first page when changing the number of items per page
     };
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -65,12 +59,12 @@ export default function DataTableMasuk() {
 
     return (
         <div className='w-full md:w-[116rem] mx-auto overflow-y-auto overflow-x-auto'>
-            <div className='flex mb-4 mt-4'>
+            <div className='flex justify-start mt-4 mb-4'>
                 <div className='flex'>
                     <input 
                         className='bg-transparent border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none ' 
                         type='text' 
-                        placeholder='   Masukkan username' 
+                        placeholder='   Masukkan Nama Aset' 
                         onChange={Filter}
                     />
                     <BsSearch className='relative right-7 top-2' size={15}/>
@@ -144,7 +138,7 @@ export default function DataTableMasuk() {
                             .map((number) => (
                                 <li className={`cursor-pointer page-link ${currentPage === number ? 'active' : ''}`} key={number}>
                                     <a 
-                                        className='page-item text-[1.1rem] m-4'
+                                        className='hover:border-2 hover:border-main-color rounded-xl hover:w-4 page-item text-[1.1rem] p-2'
                                         onClick={() => handlePageChange(number)}
                                     >
                                         {number}
