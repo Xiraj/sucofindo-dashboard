@@ -17,29 +17,27 @@ export default function DataTableKeluar() {
 
     const getData = async () => {
         try {
-            const response = await axios.get("https://sima-rest-api.vercel.app/api/v1/aset/listpinjam")
-                .then(
-                    response=> {
-                        console.log(response.data.peminjaman)
-                        setData(response.data.peminjaman.peminjaman)
-                        setFilteredData(response.data.peminjaman)
-                });
-            setData(response.data.peminjaman);
+            const response = await axios.get("https://sima-rest-api.vercel.app/api/v1/aset/listpinjam");
+            const peminjamanData = response.data.peminjaman;
+            console.log(peminjamanData);
+            setData(peminjamanData);
+            setFilteredData(peminjamanData);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
+    
+    const Filter = (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        const filtered = data.filter((item) => item.id_aset.nama_alat.toLowerCase().includes(searchTerm));
+        setFilteredData(filtered);
+        setCurrentPage(1);
+    }
 
     useEffect(() => {
         getData();
     }, []);
 
-     const Filter = (event) => {
-        const searchTerm = event.target.value.toLowerCase();
-        const filtered = data.filter((item) => item.username.toLowerCase().includes(searchTerm));
-        setFilteredData(filtered);
-        setCurrentPage(1); 
-    }
 
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= totalPages) {
