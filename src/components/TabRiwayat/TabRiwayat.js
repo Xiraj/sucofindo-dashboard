@@ -51,8 +51,8 @@ export default function BasicTabs() {
     <Box sx={{ width: '100%' }}>
       <Box>
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Barang Masuk" {...a11yProps(0)} />
-          <Tab label="Barang Keluar" {...a11yProps(1)} />
+          <Tab label="Peminjaman" {...a11yProps(0)} />
+          <Tab label="Pengembalian" {...a11yProps(1)} />
         </Tabs>
       </Box>
       <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={0}>

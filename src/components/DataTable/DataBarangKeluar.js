@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
@@ -17,11 +18,14 @@ export default function DataTableKeluar() {
 
     const getData = async () => {
         try {
-            const response = await axios.get("https://sima-rest-api.vercel.app/api/v1/aset/listpinjam");
-            const peminjamanData = response.data.peminjaman;
-            console.log(peminjamanData);
-            setData(peminjamanData);
-            setFilteredData(peminjamanData);
+            const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/listpinjam')
+                .then(
+                    response=> {
+                        console.log("Peminjaman",response.data.peminjaman)
+                        setData(response.data.peminjaman.peminjaman)
+                        setFilteredData(response.data.peminjaman)
+                });
+            setData(response.data.peminjaman);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -88,7 +92,9 @@ export default function DataTableKeluar() {
                     {records.map((item, index) => (
                         <tr key={index}>
                             <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+1+firstIndex}</td>
-                            <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
+                            <Link to={`/Detail-Barang-Keluar/${item._id}`}>
+                              <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
+                            </Link>
                             <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
                             <td className='w-[54.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.merek}</td>
                             <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.tipe}</td>
