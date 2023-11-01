@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Logo from '../../assets/sucofinfo-login.png';
 import axios from 'axios';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const PopupForm = ({ isOpen, onClose, onSubmit }) => {
   const [formData, setFormData] = useState({
@@ -41,6 +49,19 @@ useEffect(() => {
     } catch (error) {
       console.error('Error posting data:', error);
     }
+  };
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
   
   return (
@@ -163,11 +184,20 @@ useEffect(() => {
               />
             </div>
             <div className="text-center">
-              <button
-                type="submit"
-                className="bg-main-color hover:bg-blue-700 text-white font-bold w-[12.5rem] py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">
-                Submit
-              </button>
+              <Stack spacing={10} sx={{ width: '100%' }}>
+                  <Button variant="outlined" onClick={handleClick}
+                  className='hover:text-main-color hover:font-bold'
+                  sx={{ backgroundColor: '#4E73DF', color: '#FFFF', justifyContent: 'center' }}
+                  type="submit"
+                  >
+                    SUBMIT
+                  </Button>
+                  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        Berhasil Menambahkan Aset Barang
+                    </Alert>
+                  </Snackbar>
+              </Stack>
             </div>
           </form>
         </div>
