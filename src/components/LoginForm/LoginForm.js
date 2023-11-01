@@ -17,7 +17,7 @@ export default function LoginForm() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    console.log('Form submitted');
     if (!email || !password) {
       setError('Mohon isi email dan password Anda');
       return;
