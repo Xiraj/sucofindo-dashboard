@@ -6,7 +6,7 @@ export default function CardBarangKeluar () {
     const [ open ] = useState(true);
 
     return(
-        <Box className={`${open ? 'w-[67.291rem] h-[102vh]':''} bg-white ml-[2.5rem] mt-[3.5rem] rounded-xl`}>
+        <Box className="bg-white w-full md:w-[67.291rem] mx-auto md:h-[94.5rem] mt-12 p-5 rounded-xl">
             <Box className="flex">
                 <h1 className="ml-[2.5rem] pt-[1.5rem] text-[2rem] ">Data Barang Keluar</h1>
             </Box>

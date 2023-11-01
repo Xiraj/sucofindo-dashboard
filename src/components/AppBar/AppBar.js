@@ -11,6 +11,8 @@ import MenuItem from '@mui/material/MenuItem';
 import { FaRegBell, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Badge } from '@mui/material';
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const settings = ['Keluar'];
 
@@ -30,6 +32,7 @@ function UserAppBar({ username }) {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const notify = () => toast("Barang Keluar", "(", " ", ")");
 
   return (
     <AppBar position="static" sx={{ backgroundColor: 'white' }}>
@@ -42,10 +45,12 @@ function UserAppBar({ username }) {
                   size="small"
                   aria-label="show 17 new notifications"
                   color="inherit"
+                  onClick={notify}
                 >
                   <Badge badgeContent={1} color="error">
                     <FaRegBell color='#4E73DF' size={26}/>
                   </Badge>
+                  <ToastContainer />
                 </IconButton>
               </MenuItem>
             </Box>
