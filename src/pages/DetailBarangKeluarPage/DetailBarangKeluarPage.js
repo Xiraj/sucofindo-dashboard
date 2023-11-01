@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function DetailBarangKeluarPage () {
     const { _id } = useParams([]);
     const [data, setData] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
       const getData = async () => {
@@ -15,9 +16,29 @@ export default function DetailBarangKeluarPage () {
           console.error('Error fetching data:', error);
         }
       };
-  
       getData();
     }, [_id]);
+
+    const handleApprove = async () => {
+      try {
+          const adminId = data?.adminId;
+          const peminjamanId = data?.peminjamanId;
+
+          if (adminId && peminjamanId) {
+              const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/aset/peminjaman/approve', {
+                  adminId,
+                  peminjamanId
+              });
+              console.log('Approve successful', response.data);
+              navigate('/Home');
+          } else {
+              console.error('Missing adminId or peminjamanId in data');
+          }
+      } catch (error) {
+          console.error('Approve error', error);
+      }
+  };
+    
     return(
         <div className="max-h-full">
             <div className="relative top-[4rem]">
@@ -94,7 +115,7 @@ export default function DetailBarangKeluarPage () {
                 <button className='bg-[#FF0404] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold mr-[2rem]'>
                     Tolak
                 </button>
-                <button className='bg-[#2AC43A] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold'>
+                <button onClick={handleApprove} className='bg-[#2AC43A] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold'>
                     Terima
                 </button>
             </div>

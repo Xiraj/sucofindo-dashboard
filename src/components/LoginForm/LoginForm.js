@@ -8,7 +8,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-    const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState(null);
   const navigate = useNavigate();
 
   const buttonPass = () => {

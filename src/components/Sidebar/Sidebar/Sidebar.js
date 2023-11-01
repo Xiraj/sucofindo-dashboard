@@ -19,17 +19,17 @@ export default function Sidebar({ userRole }) {
         />, 
         to: '/Home', label: 'Home'
         },
+        {   icon: <RiFolderDownloadFill
+          className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
+          color='white' size={`${ open ? 20 : 26 }`} 
+          />, 
+          to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
+        },
         {   icon: <RiFolderUploadFill
               className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
               color='white' size={`${ open ? 20 : 26 }`} 
             />, 
             to: '/Barang-Masuk', label: 'Persetujuan Pengembalian'
-        },
-        {   icon: <RiFolderDownloadFill
-                    className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
         },
         {   icon: <RiFolderHistoryFill
                 className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
@@ -51,17 +51,17 @@ export default function Sidebar({ userRole }) {
             />, 
             to: '/Total-Aset', label: 'Total Aset Tersedia'
         },
+        {   icon: <RiFolderDownloadFill
+          className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
+          color='white' size={`${ open ? 20 : 26 }`} 
+          />, 
+          to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
+        },
         {   icon: <RiFolderUploadFill
               className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
               color='white' size={`${ open ? 20 : 26 }`} 
             />, 
             to: '/Barang-Masuk', label: 'Persetujuan Pengembalian'
-        },
-        {   icon: <RiFolderDownloadFill
-                    className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
-                    color='white' size={`${ open ? 20 : 26 }`} 
-            />, 
-            to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
         },
         {   icon: <RiFolderHistoryFill
                 className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
