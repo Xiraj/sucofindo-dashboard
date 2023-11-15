@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 export default function LoginForm() {
@@ -8,7 +8,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-    const [username, setUsername] = useState(null);
+  // const [username, setUsername] = useState(null);
   const navigate = useNavigate();
 
   const buttonPass = () => {
@@ -17,26 +17,21 @@ export default function LoginForm() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('Form submitted');
+  
     if (!email || !password) {
       setError('Mohon isi email dan password Anda');
       return;
     }
-
+  
     try {
-      const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/admin/signIn', {
+      const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/auth/signIn', {
         email,
         password,
       });
-
+  
       console.log('Login successful', response.data);
-
-      const username = response.data.username;
-
-      setUsername(username);
-
       navigate('/Home');
-    } catch (error) {
+    } catch (error) { 
       console.error('Login error', error);
       setError('Email atau password salah. Silakan coba lagi.');
     }
