@@ -18,7 +18,7 @@ export default function DataTableKeluar() {
 
     const getData = async () => {
         try {
-        const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/listpinjam')
+        const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam')
                 .then(
                     response=> {
                         console.log("Peminjaman",response.data.peminjaman)

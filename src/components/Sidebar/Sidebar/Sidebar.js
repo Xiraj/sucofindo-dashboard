@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from "@mui/material";
 import { Link } from 'react-router-dom';
 import SucofindoLogo from '../../../assets/logo-sucofindo.png';
 import { BsArrowLeftCircleFill } from 'react-icons/bs';
 import { FaFolder, FaHome } from 'react-icons/fa';
 import { RiFolderDownloadFill, RiFolderUploadFill, RiFolderHistoryFill } from 'react-icons/ri';
+import axios from 'axios';
 
 export default function Sidebar({ userRole }) {
   const [open, setOpen] = useState(true);
+  const [role, setRole] = useState('');
+  useEffect(() => {
+    axios.get('https://sima-rest-api.vercel.app/api/v1/user/profile', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+      },
+    })
+    .then(response => {
+      const role = response.data.role;
+      setRole(role);
+      console.log("Role", role)
+    })
+    .catch(error => {
+      console.error('Error fetching user profile:', error);
+    });
+  }
+,[])
 
   const getMenuItems = () => {
-    const userRole='superAdmin';
+    const userRole=`${role}`;
     const menuItemsByRole = {
       admin: [
         { icon: <FaHome 

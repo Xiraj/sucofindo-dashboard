@@ -1,15 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import AuthContext from '../Context';
 
 export default function LoginForm() {
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const [username, setUsername] = useState(null);
   const navigate = useNavigate();
+  const {_Login} = useContext(AuthContext);
 
   const buttonPass = () => {
     setShowPass((prevState) => !prevState);
@@ -17,30 +18,39 @@ export default function LoginForm() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     if (!email || !password) {
       setError('Mohon isi email dan password Anda');
       return;
     }
-
+  
     try {
-      const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/admin/signIn', {
+      const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/auth/signIn', {
         email,
         password,
       });
-
+  
       console.log('Login successful', response.data);
 
-      const username = response.data.username;
+      const { token, user } = response.data;
 
-      setUsername(username);
+      if (user.role !== 'admin' && user.role !== 'superAdmin') {
+        setError('Anda tidak memiliki izin untuk masuk.');
+        return;
+      }
 
+      localStorage.setItem('authToken', response.data.token)
+  
+      const accessToken = response.data.token;
+      _Login(accessToken);
       navigate('/Home');
-    } catch (error) {
+    } catch (error) { 
       console.error('Login error', error);
       setError('Email atau password salah. Silakan coba lagi.');
     }
   };
+  
+  
 
   return (
     <div>

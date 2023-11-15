@@ -23,7 +23,7 @@ const PopupForm = ({ isOpen, onClose, onSubmit }) => {
 
   const postData = async () => {
     try {
-        const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/data/aset', formData);
+        const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/data/addAset', formData);
         console.log('Data posted successfully:', response.data);
         
     } catch (error) {

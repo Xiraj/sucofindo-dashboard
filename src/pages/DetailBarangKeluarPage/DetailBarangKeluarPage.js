@@ -10,7 +10,7 @@ export default function DetailBarangKeluarPage () {
     useEffect(() => {
       const getData = async () => {
         try {
-          const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/peminjaman/${_id}`);
+          const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam/${_id}`);
           setData(response.data.peminjaman);
         } catch (error) {
           console.error('Error fetching data:', error);
