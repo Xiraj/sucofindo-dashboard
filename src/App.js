@@ -9,7 +9,7 @@ import DetailBarangKeluar from './Routes/DetailBarangKeluar';
 import Riwayat from './Routes/Riwayat/Riwayat';
 import Login from './pages/Login/Login';
 import Layout from './components/Layout/Layout';
-import RequireAuth from './components/RequireAuth/RequireAuth';
+import PrivateRoutes from './private/PrivateRoute';
 
 export default function App () {
   return (
@@ -18,8 +18,8 @@ export default function App () {
         {/* Public Routing */}
         <Route path='/Login' element={<Login/>}/>
         {/* Private Routing */}
-        <Route element={<RequireAuth/>}>
-          <Route path='/Home' element={<Home/>}/>
+        <Route element={<PrivateRoutes/>}>
+          <Route path='/Home' element={<Home/>} exact/>
           <Route path='/Total-Aset' element={<Aset/>}/>
           <Route path='/Barang-Masuk' element={<BarangMasuk/>}/>
           <Route path='/Barang-Keluar' element={<BarangKeluar/>}/>
