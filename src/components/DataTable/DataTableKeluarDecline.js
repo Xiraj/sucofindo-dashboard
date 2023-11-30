@@ -4,7 +4,7 @@ import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
 
-export default function DataTableMasuk() {
+export default function DataTableKeluarDecline() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -15,23 +15,22 @@ export default function DataTableMasuk() {
     const totalRecords = Array.isArray(filteredData) ? filteredData.length : 0;
     const totalPages = Math.ceil(totalRecords / recordPerPage);
 
-const getData = async () => {
+    const getData = async (status) => {
         try {
-            const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/peminjamanHistory')
-                .then(
-                    response=> {
-                        console.log("Peminjaman",response.data.peminjamanHistory)
-                        setData(response.data.peminjamanHistory)
-                        setFilteredData(response.data.peminjamanHistory)
-                });
-            setData(response.data.peminjamanHistory);
+            const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam?status=${status}`);
+            
+            console.log("Peminjaman", response.data.pengembalian);
+            
+            const filteredData = response.data.pengembalian.filter(item => item.status === status);
+            setData(filteredData);
+            setFilteredData(filteredData);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
-
+    
     useEffect(() => {
-        getData();
+        getData('Decline'); // Fetch and display data with 'Decline' status
     }, []);
 
     const Filter = (event) => {
@@ -55,10 +54,9 @@ const getData = async () => {
     for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
     }
-    
     return (
-        <div className='w-full md:w-[107.5rem] mx-auto overflow-y-auto overflow-x-auto md:mr-[2.5rem]'>
-            <div className='flex justify-start mt-4 mb-4'>
+        <div className='w-full md:w-[127.5rem] mx-auto overflow-y-auto overflow-x-auto md:mr-[2.5rem]'>
+             <div className='flex justify-start mt-4 mb-4'>
                 <div className='flex'>
                     <input 
                         className='bg-transparent border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none ' 
@@ -70,37 +68,37 @@ const getData = async () => {
                 </div>
             </div>
             <table>
-                <thead className='font-bold w-[66.5rem] h-[3.5rem] bg-[#F3F3F3]'>
+                <thead className='w-[86.5rem] h-[3.5rem] font-bold bg-[#F3F3F3]'>
                     <tr>
-                        <td className='w-[1.5rem] pl-3 border-l-2 border-y-2 border-y-[#E8E8E8]'>No</td>
-                        <td className='w-[58.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>Nama Asset</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Tag Number</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Merek</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Tipe</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Nomor Seri</td>
-                        <td className='w-[102.625rem] border-y-2 border-[#e8e8e8]'>Penanggung Jawab Aset</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Lokasi Aset</td>
-                        <td className='w-[68.625rem] border-y-2 border-[#e8e8e8]'>Kondisi Aset</td>
-                        <td className='w-[79.625rem] border-y-2 border-[#e8e8e8]'>Tanggal Peminjaman</td>
-                        <td className='w-[58.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
-                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Jenis</td>
+                        <th className='w-[18.625rem] pl-3 py-2 border-l-2 border-y-2 border-y-[#E8E8E8] text-left'>No</th>
+                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nama Aset</th>
+                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tag Number</th>
+                        <th className='w-[4.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Merek</th>
+                        <th className='w-[18.625rem] border-y-2 border-[#e8e8e8] text-left'>Tipe</th>
+                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nomor Seri</th>
+                        <th className='w-[80.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Penanggung Jawab Aset</th>
+                        <th className='w-[50.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Lokasi Aset</th>
+                        <th className='w-[48.625rem] border-y-2 border-[#e8e8e8] text-left'>Kondisi Aset</th>
+                        <th className='w-[58.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tanggal Peminjaman</th>
+                        <td className='w-[48.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
+                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Disetujui Oleh</td>
                     </tr>
                 </thead>
                 <tbody>
                     {records.map((item, index) => (
                         <tr key={index}>
-                            <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+firstIndex+1}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.nama_alat || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.tag_number || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.merek || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.tipe || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.nomor_seri || '-'}</td>
-                            <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.penanggung_jawab || '-'}</td>
-                            <td className='w-[20.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.lokasi|| '-'}</td>
-                            <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.kondisi_aset|| '-'}</td>
-                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tanggal_peminjaman || '-'}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tujuan_peminjaman || '-'}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.jenis || '-'}</td>
+                            <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+1+firstIndex}</td>
+                            <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.nama_alat}</td>
+                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tag_number}</td>
+                            <td className='w-[54.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.merek}</td>
+                            <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.tipe}</td>
+                            <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.nomor_seri}</td>
+                            <td className='w-[80.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.penanggung_jawab}</td>
+                            <td className='w-[40.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.lokasi_aset}</td>
+                            <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
+                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
+                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
+                            <td className='w-[68.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>{item.disetujui}</td>
                         </tr>
                     ))}
                 </tbody>

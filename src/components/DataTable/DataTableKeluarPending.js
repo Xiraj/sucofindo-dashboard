@@ -4,7 +4,7 @@ import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
 
-export default function DataTableKeluar() {
+export default function DataTableKeluarPending() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -15,22 +15,22 @@ export default function DataTableKeluar() {
     const totalRecords = Array.isArray(filteredData) ? filteredData.length : 0;
     const totalPages = Math.ceil(totalRecords / recordPerPage);
 
-    const getData = async () => {
+    const getData = async (status) => {
         try {
-            const response = await axios.get("https://sima-rest-api.vercel.app/api/v1/data/aset")
-                .then(
-                    response=> {
-                        setData(response.data.data)
-                        setFilteredData(response.data.data)
-                });
-            setData(response.data.data);
+            const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam?status=${status}`);
+            
+            console.log("Peminjaman", response.data.pengembalian);
+            
+            const filteredData = response.data.pengembalian.filter(item => item.status === status);
+            setData(filteredData);
+            setFilteredData(filteredData);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
-
+    
     useEffect(() => {
-        getData();
+        getData('Pending'); // Fetch and display data with 'Decline' status
     }, []);
 
     const Filter = (event) => {

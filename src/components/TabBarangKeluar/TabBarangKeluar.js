@@ -4,7 +4,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import DataBarangKeluar from '../DataTable/DataBarangKeluar';
+import DataBarangKeluarPending from '../DataTable/DataTableKeluarPending';
+import DataBarangKeluarApproved from '../DataTable/DataTableKeluarApproved';
+import DataBarangKeluarDecline from '../DataTable/DataTableKeluarDecline';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,13 +58,13 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={0}>
-        <DataBarangKeluar/>
+        <DataBarangKeluarPending/>
       </CustomTabPanel>
       <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={1}>
-        <DataBarangKeluar/>
+        <DataBarangKeluarApproved/>
       </CustomTabPanel>
       <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={2}>
-        <DataBarangKeluar/>
+        <DataBarangKeluarDecline/>
       </CustomTabPanel>
     </Box>
   );

@@ -3,8 +3,9 @@ import axios from 'axios';
 import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
-export default function DataTableMasuk() {
+export default function DataTableMasukDecline() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -15,25 +16,24 @@ export default function DataTableMasuk() {
     const totalRecords = Array.isArray(filteredData) ? filteredData.length : 0;
     const totalPages = Math.ceil(totalRecords / recordPerPage);
 
-const getData = async () => {
+    const getData = async (status) => {
         try {
-            const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/peminjamanHistory')
-                .then(
-                    response=> {
-                        console.log("Peminjaman",response.data.peminjamanHistory)
-                        setData(response.data.peminjamanHistory)
-                        setFilteredData(response.data.peminjamanHistory)
-                });
-            setData(response.data.peminjamanHistory);
+            const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPengembalian?status=${status}`);
+            
+            console.log("Peminjaman", response.data.pengembalian);
+            
+            const filteredData = response.data.pengembalian.filter(item => item.status === status);
+            setData(filteredData);
+            setFilteredData(filteredData);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
     };
-
+    
     useEffect(() => {
-        getData();
+        getData('Decline'); // Fetch and display data with 'Decline' status
     }, []);
-
+    
     const Filter = (event) => {
         const searchTerm = event.target.value.toLowerCase();
         const filtered = data.filter((item) => item.nama_alat.toLowerCase().includes(searchTerm));
@@ -55,9 +55,9 @@ const getData = async () => {
     for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
     }
-    
+
     return (
-        <div className='w-full md:w-[107.5rem] mx-auto overflow-y-auto overflow-x-auto md:mr-[2.5rem]'>
+        <div className='w-full md:w-[116rem] mx-auto overflow-y-auto overflow-x-auto'>
             <div className='flex justify-start mt-4 mb-4'>
                 <div className='flex'>
                     <input 
@@ -69,7 +69,7 @@ const getData = async () => {
                     <BsSearch className='relative right-7 top-2' size={15}/>
                 </div>
             </div>
-            <table>
+            <table className=''>
                 <thead className='font-bold w-[66.5rem] h-[3.5rem] bg-[#F3F3F3]'>
                     <tr>
                         <td className='w-[1.5rem] pl-3 border-l-2 border-y-2 border-y-[#E8E8E8]'>No</td>
@@ -83,24 +83,28 @@ const getData = async () => {
                         <td className='w-[68.625rem] border-y-2 border-[#e8e8e8]'>Kondisi Aset</td>
                         <td className='w-[79.625rem] border-y-2 border-[#e8e8e8]'>Tanggal Peminjaman</td>
                         <td className='w-[58.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
-                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Jenis</td>
+                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Diajukan Oleh</td>
+                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
                     </tr>
                 </thead>
                 <tbody>
                     {records.map((item, index) => (
                         <tr key={index}>
                             <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+firstIndex+1}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.nama_alat || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.tag_number || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.merek || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.tipe || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.nomor_seri || '-'}</td>
-                            <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.penanggung_jawab || '-'}</td>
-                            <td className='w-[20.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.lokasi|| '-'}</td>
-                            <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.kondisi_aset|| '-'}</td>
-                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tanggal_peminjaman || '-'}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tujuan_peminjaman || '-'}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.jenis || '-'}</td>
+                            <Link to={`/Detail-Barang-Masuk/${item._id}`}>
+                              <td className='w-[148.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
+                            </Link>
+                            <td className='w-[68.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
+                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.merek}</td>
+                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tipe}</td>
+                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nomor_seri}</td>
+                            <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
+                            <td className='w-[20.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
+                            <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
+                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
+                            <td className='w-[98.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
+                            <td className='w-[98.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_user.username}</td>
+                            <td className='w-[98.625rem] h-[3.5rem] text-yellow-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -115,7 +119,7 @@ const getData = async () => {
                                 <option value={20}>20</option>
                             </select>
                             <p className='ml-4'>
-                                Menampilkan Riwayat Barang Masuk
+                                Menampilkan Data Barang
                             </p>
                         </label>
                     </div>

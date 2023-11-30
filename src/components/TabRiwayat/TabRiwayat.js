@@ -5,7 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import DataTableMasuk from '../DataTable/DataTableMasuk';
-import DataTableKeluar from '../DataTable/DataTableKeluar';
+import DataTableKeluar from '../DataTable/DataBarangKeluar';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;

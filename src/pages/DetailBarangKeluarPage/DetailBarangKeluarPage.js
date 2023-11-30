@@ -1,43 +1,117 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import AuthContext from "../../components/Context";
 import { useNavigate, useParams } from 'react-router-dom';
 
 export default function DetailBarangKeluarPage () {
     const { _id } = useParams([]);
     const [data, setData] = useState([]);
     const navigate = useNavigate();
+    const {_Accept} = useContext(AuthContext);
+    const [userId, setUserId] = useState();
 
     useEffect(() => {
-      const getData = async () => {
+      const fetchData = async () => {
         try {
-          const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam/${_id}`);
-          setData(response.data.peminjaman);
+          // Fetch user profile data
+          const userResponse = await axios.get('https://sima-rest-api.vercel.app/api/v1/user/profile', {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            },
+          });
+    
+          const userId = userResponse.data.id;
+          setUserId(userId);
+          console.log("User ID:", userId);
+    
+          const asetResponse = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam/${_id}`);
+          const asetData = asetResponse.data.peminjaman;
+          setData(asetData);
+          console.log("Aset Data:", asetData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
       };
-      getData();
+    
+      fetchData();
     }, [_id]);
-
-    const handleApprove = async () => {
+  
+    const handleAccept = async () => {
       try {
-          const adminId = data?.adminId;
-          const peminjamanId = data?.peminjamanId;
-
-          if (adminId && peminjamanId) {
-              const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/aset/peminjaman/approve', {
-                  adminId,
-                  peminjamanId
-              });
-              console.log('Approve successful', response.data);
-              navigate('/Home');
-          } else {
-              console.error('Missing adminId or peminjamanId in data');
+        const response = await axios.post(
+          `https://sima-rest-api.vercel.app/api/v1/aset/acceptPeminjaman/${_id}`,
+          {
+            adminId: userId,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            },
           }
-      } catch (error) {
-          console.error('Approve error', error);
+        );
+    
+        console.log('Accept Success', response.data);
+    
+        console.log('Token before update:', localStorage.getItem('authToken'));
+    
+        const newToken = response.data.token;
+    
+        if (newToken) {
+          console.log('Token after update:', newToken);
+          localStorage.setItem('authToken', newToken);
+    
+          const accessToken = response.data.token;
+          _Accept(accessToken);
+    
+          // Wait for the token to be set before navigating
+          await navigate('/Barang-Keluar');
+        } else {
+          console.error('Token is undefined in the server response.');
+        }
+      } catch (error) { 
+        console.error('Accept error', error);
       }
-  };
+    };    
+    
+    const handleDecline = async () => {
+      try {
+        const response = await axios.post(
+          `https://sima-rest-api.vercel.app/api/v1/aset/rejectPeminjaman/${_id}`,
+          {
+            adminId: userId,
+          },
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            },
+          }
+        );
+    
+        console.log('Accept Success', response.data);
+    
+        console.log('Token before update:', localStorage.getItem('authToken'));
+    
+        const newToken = response.data.token;
+    
+        if (newToken) {
+          console.log('Token after update:', newToken);
+          localStorage.setItem('authToken', newToken);
+    
+          const accessToken = response.data.token;
+          _Accept(accessToken);
+    
+          // Wait for the token to be set before navigating
+          await navigate('/Barang-Keluar');
+        } else {
+          console.error('Token is undefined in the server response.');
+        }
+      } catch (error) { 
+        console.error('Accept error', error);
+      }
+    };    
     
     return(
         <div className="max-h-full">
@@ -112,10 +186,10 @@ export default function DetailBarangKeluarPage () {
         </div>
             </div>
             <div className="flex flex-row mt-[1rem] ml-[50rem] mb-[2rem]">
-                <button className='bg-[#FF0404] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold mr-[2rem]'>
+                <button onClick={handleDecline} className='bg-[#FF0404] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold mr-[2rem]'>
                     Tolak
                 </button>
-                <button onClick={handleApprove} className='bg-[#2AC43A] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold'>
+                <button onClick={handleAccept} className='bg-[#2AC43A] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold'>
                     Terima
                 </button>
             </div>

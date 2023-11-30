@@ -1,25 +1,97 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import ImageView from "../../components/ImageView";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import AuthContext from "../../components/Context";
+import { useParams, useNavigate } from "react-router-dom";
 
 export default function DetailBarangMasukPage () {
   const { _id } = useParams([]);
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
+  const {_Accept} = useContext(AuthContext);
+  const [userId, setUserId] = useState();
 
   useEffect(() => {
-    const getData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/peminjaman/${_id}`);
-        setData(response.data.peminjaman);
-        console.log("apaaa", response.data.peminjaman)
+        const userResponse = await axios.get('https://sima-rest-api.vercel.app/api/v1/user/profile', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        });
+  
+        const userId = userResponse.data.id;
+        setUserId(userId);
+        console.log("User ID:", userId);
+  
+        const asetResponse = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPengembali/${_id}`);
+        const asetData = asetResponse.data.pengembalian;
+        setData(asetData);
+        console.log("Aset Data:", asetData);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
-    getData();
+  
+    fetchData();
   }, [_id]);
+
+  const handleAccept = async () => {
+    try {
+      const response = await axios.post(
+        `https://sima-rest-api.vercel.app/api/v1/aset/acceptPengembalian/${_id}`,
+        {
+          adminId: userId,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        }
+      );
+  
+      console.log('Accept Success', response.data);
+  
+      localStorage.setItem('authToken', response.data.token);
+  
+      const accessToken = response.data.token;
+      _Accept(accessToken);
+      navigate('/Home');
+    } catch (error) { 
+      console.error('Accept error', error);
+    }
+  };
+
+  const handleDecline = async () => {
+    try {
+      const response = await axios.post(
+        `https://sima-rest-api.vercel.app/api/v1/aset/rejectPengembalian/${_id}`,
+        {
+          adminId: userId,
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        }
+      );
+  
+      console.log('Accept Success', response.data);
+  
+      localStorage.setItem('authToken', response.data.token);
+  
+      const accessToken = response.data.token;
+      _Accept(accessToken);
+      navigate('/Home');
+    } catch (error) { 
+      console.error('Accept error', error);
+    }
+  };
+  
+
     return(
         <div className="max-h-full">
             <div className="relative top-[4rem]">
@@ -73,7 +145,7 @@ export default function DetailBarangMasukPage () {
                   </div>
 									<p className="text-[1.25rem] font-semibold text-[#515151] mt-[2.2rem]">Foto Aset</p>
 										<div className="bg-white p-4 border-2 rounded-lg w-[27rem] h-[20rem] overflow-y-scroll mb-[2rem] mt-4">
-											<ImageView imageUrl="https://images.unsplash.com/photo-1566895291281-ea63efd4bdbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8OSUzQTE2fGVufDB8fDB8fHww&w=1000&q=80" />
+											<ImageView imageUrl={data.foto}/>
 										</div>
               </div>
           )}
@@ -81,10 +153,10 @@ export default function DetailBarangMasukPage () {
         </div>
             </div>
             <div className="flex flex-row mt-[1rem] ml-[50rem] mb-[2rem]">
-                <button className='bg-[#FF0404] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold mr-[2rem]'>
+                <button onClick={handleDecline} className='bg-[#FF0404] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold mr-[2rem]'>
                     Tolak
                 </button>
-                <button className='bg-[#2AC43A] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold'>
+                <button onClick={handleAccept} className='bg-[#2AC43A] w-[11.25rem] h-[2.875rem] mt-[2.5rem] rounded-lg text-white font-semibold'>
                     Terima
                 </button>
             </div>
