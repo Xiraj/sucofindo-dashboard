@@ -79,11 +79,11 @@ export default function DataTableMasukApproved() {
                         <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Tipe</td>
                         <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Nomor Seri</td>
                         <td className='w-[102.625rem] border-y-2 border-[#e8e8e8]'>Penanggung Jawab Aset</td>
-                        <td className='w-[50.625rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>Lokasi Aset</td>
+                        <td className='w-[98.625rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>Lokasi Aset</td>
                         <td className='w-[68.625rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>Kondisi Aset</td>
                         <td className='w-[79.625rem] border-y-2 border-[#e8e8e8]'>Tanggal Peminjaman</td>
-                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Diajukan Oleh</td>
-                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
+                        <td className='w-[78.625rem] border-y-2 border-[#e8e8e8]'>Diajukan Oleh</td>
+                        <td className='w-[48.625rem] border-y-2 border-[#e8e8e8]'>Status</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -96,11 +96,11 @@ export default function DataTableMasukApproved() {
                             <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tipe}</td>
                             <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nomor_seri}</td>
                             <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
-                            <td className='w-[22.625rem] h-[3.5rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
+                            <td className='w-[98.625rem] h-[3.5rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
                             <td className='w-[48.625rem] h-[3.5rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
                             <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_pengembalian}</td>
                             <td className='w-[98.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_user.username}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] text-green-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
+                            <td className='w-[48.625rem] h-[3.5rem] text-green-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
                         </tr>
                     ))}
                 </tbody>

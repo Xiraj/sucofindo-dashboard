@@ -77,11 +77,11 @@ export default function DataTableKeluarRejected() {
                         <th className='w-[18.625rem] border-y-2 border-[#e8e8e8] text-left'>Tipe</th>
                         <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nomor Seri</th>
                         <th className='w-[80.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Penanggung Jawab Aset</th>
-                        <th className='w-[50.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Lokasi Aset</th>
+                        <th className='w-[98.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Lokasi Aset</th>
                         <th className='w-[48.625rem] border-y-2 border-[#e8e8e8] text-left'>Kondisi Aset</th>
                         <th className='w-[58.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tanggal Peminjaman</th>
                         <td className='w-[48.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
-                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
+                        <td className='w-[48.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,11 +94,11 @@ export default function DataTableKeluarRejected() {
                             <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.tipe}</td>
                             <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.nomor_seri}</td>
                             <td className='w-[80.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
-                            <td className='w-[40.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
+                            <td className='w-[98.625rem] h-[3.5rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
                             <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
                             <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
                             <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
-                            <td className='w-[78.625rem] h-[3.5rem] text-red-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
+                            <td className='w-[48.625rem] h-[3.5rem] text-red-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
                         </tr>
                     ))}
                 </tbody>
