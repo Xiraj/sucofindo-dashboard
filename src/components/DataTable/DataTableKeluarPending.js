@@ -89,7 +89,7 @@ export default function DataTableKeluarPending() {
                     {records.map((item, index) => (
                         <tr key={index}>
                             <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+1+firstIndex}</td>
-                            <Link to={`/Detail-Barang-Masuk/${item._id}`}>
+                            <Link to={`/Detail-Barang-Keluar/${item._id}`}>
                               <td className='w-[108.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
                             </Link>
                             <td className='w-[58.625rem] pl-[2rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>

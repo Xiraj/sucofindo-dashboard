@@ -40,7 +40,7 @@ export default function DetailBarangMasukPage () {
   const handleAccept = async () => {
     try {
       const response = await axios.post(
-        `https://sima-rest-api.vercel.app/api/v1/aset/acceptPengembalian/${_id}`,
+        `https://sima-rest-api.vercel.app/api/v1/aset/acceptPengembalia/${_id}`,
         {
           adminId: userId,
         },
