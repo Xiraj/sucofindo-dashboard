@@ -18,11 +18,11 @@ export default function DataTableMasukPending() {
 
     const getData = async (status) => {
         try {
-            const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPengembalian?status=${status}`);
+            const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam?status=${status}`);
             
-            console.log("Peminjaman", response.data.pengembalian);
+            console.log("Peminjaman", response.data.peminjaman);
             
-            const filteredData = response.data.pengembalian.filter(item => item.status === status);
+            const filteredData = response.data.peminjaman.filter(item => item.status === status);
             setData(filteredData);
             setFilteredData(filteredData);
         } catch (error) {

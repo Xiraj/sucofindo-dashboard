@@ -19,9 +19,9 @@ export default function DataTableKeluarApproved() {
         try {
             const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam?status=${status}`);
             
-            console.log("Peminjaman", response.data.pengembalian);
+            console.log("Peminjaman", response.data.peminjaman);
             
-            const filteredData = response.data.pengembalian.filter(item => item.status === status);
+            const filteredData = response.data.peminjaman.filter(item => item.status === status);
             setData(filteredData);
             setFilteredData(filteredData);
         } catch (error) {
@@ -80,25 +80,25 @@ export default function DataTableKeluarApproved() {
                         <th className='w-[50.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Lokasi Aset</th>
                         <th className='w-[48.625rem] border-y-2 border-[#e8e8e8] text-left'>Kondisi Aset</th>
                         <th className='w-[58.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tanggal Peminjaman</th>
-                        <td className='w-[48.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
-                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Disetujui Oleh</td>
+                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tujuan Peminjaman</th>
+                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
                     </tr>
                 </thead>
                 <tbody>
                     {records.map((item, index) => (
                         <tr key={index}>
                             <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+1+firstIndex}</td>
-                            <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.nama_alat}</td>
-                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tag_number}</td>
-                            <td className='w-[54.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.merek}</td>
-                            <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.tipe}</td>
-                            <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.nomor_seri}</td>
-                            <td className='w-[80.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.penanggung_jawab}</td>
-                            <td className='w-[40.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.lokasi_aset}</td>
+                            <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
+                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
+                            <td className='w-[54.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.merek}</td>
+                            <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.tipe}</td>
+                            <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.nomor_seri}</td>
+                            <td className='w-[80.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
+                            <td className='w-[40.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
                             <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
                             <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
                             <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
-                            <td className='w-[68.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>{item.disetujui}</td>
+                            <td className='w-[78.625rem] h-[3.5rem] text-green-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
                         </tr>
                     ))}
                 </tbody>

@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import DataBarangMasukPending from '../DataTable/DataBarangMasukPending';
 import DataBarangMasukApproved from '../DataTable/DataBarangMasukApproved';
-import DataBarangMasukDecline from '../DataTable/DataBarangMasukDecline';
+import DataBarangMasukRejected from '../DataTable/DataBarangMasukRejected';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -64,7 +64,7 @@ export default function BasicTabs() {
         <DataBarangMasukApproved/>
       </CustomTabPanel>
       <CustomTabPanel className='md:w-[60rem] md:h-[60rem] overflow-x-auto pr-9 pt-2' value={value} index={2}>
-        <DataBarangMasukDecline/>
+        <DataBarangMasukRejected/>
       </CustomTabPanel>
     </Box>
   );

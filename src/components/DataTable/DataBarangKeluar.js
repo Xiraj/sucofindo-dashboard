@@ -105,7 +105,9 @@ export default function DataTableKeluar() {
                             <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
                             <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
                             <td className='w-[68.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_user.username}</td>
-                            <td className='w-[68.625rem] h-[3.5rem] border-r-2 text-yellow-500 border-y-2 border-[#e8e8e8]'>{item.status}</td>
+                            <td className={`w-[68.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8] ${item.status === 'Pending' ? 'text-yellow-500' : (item.status === 'Approved' ? 'text-green-500' : 'text-red-500')}`}>
+                                {item.status}
+                            </td>
                         </tr>
                     ))}
                 </tbody>

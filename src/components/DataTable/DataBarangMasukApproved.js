@@ -20,7 +20,7 @@ export default function DataTableMasukApproved() {
         try {
             const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPengembalian?status=${status}`);
             
-            console.log("Peminjaman", response.data.pengembalian);
+            console.log("Pengembalian", response.data.pengembalian);
             
             const filteredData = response.data.pengembalian.filter(item => item.status === status);
             setData(filteredData);
@@ -74,15 +74,14 @@ export default function DataTableMasukApproved() {
                     <tr>
                         <td className='w-[1.5rem] pl-3 border-l-2 border-y-2 border-y-[#E8E8E8]'>No</td>
                         <td className='w-[58.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>Nama Asset</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Tag Number</td>
+                        <td className='w-[50.625rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>Tag Number</td>
                         <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Merek</td>
                         <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Tipe</td>
                         <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Nomor Seri</td>
                         <td className='w-[102.625rem] border-y-2 border-[#e8e8e8]'>Penanggung Jawab Aset</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Lokasi Aset</td>
-                        <td className='w-[68.625rem] border-y-2 border-[#e8e8e8]'>Kondisi Aset</td>
+                        <td className='w-[50.625rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>Lokasi Aset</td>
+                        <td className='w-[68.625rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>Kondisi Aset</td>
                         <td className='w-[79.625rem] border-y-2 border-[#e8e8e8]'>Tanggal Peminjaman</td>
-                        <td className='w-[58.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
                         <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Diajukan Oleh</td>
                         <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
                     </tr>
@@ -91,20 +90,17 @@ export default function DataTableMasukApproved() {
                     {records.map((item, index) => (
                         <tr key={index}>
                             <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+firstIndex+1}</td>
-                            <Link to={`/Detail-Barang-Masuk/${item._id}`}>
-                              <td className='w-[148.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
-                            </Link>
-                            <td className='w-[68.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
+                            <td className='w-[78.625rem] pl-[2rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
+                            <td className='w-[70.625rem] h-[3.5rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
                             <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.merek}</td>
                             <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tipe}</td>
                             <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nomor_seri}</td>
                             <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
-                            <td className='w-[20.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
-                            <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
-                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
+                            <td className='w-[22.625rem] h-[3.5rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
+                            <td className='w-[48.625rem] h-[3.5rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
+                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_pengembalian}</td>
                             <td className='w-[98.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_user.username}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] text-yellow-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
+                            <td className='w-[98.625rem] h-[3.5rem] text-green-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
                         </tr>
                     ))}
                 </tbody>

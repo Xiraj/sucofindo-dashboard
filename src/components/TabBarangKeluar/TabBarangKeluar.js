@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import DataBarangKeluarPending from '../DataTable/DataTableKeluarPending';
 import DataBarangKeluarApproved from '../DataTable/DataTableKeluarApproved';
-import DataBarangKeluarDecline from '../DataTable/DataTableKeluarDecline';
+import DataBarangKeluarRejected from '../DataTable/DataTableKeluarRejected';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -64,7 +64,7 @@ export default function BasicTabs() {
         <DataBarangKeluarApproved/>
       </CustomTabPanel>
       <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={2}>
-        <DataBarangKeluarDecline/>
+        <DataBarangKeluarRejected/>
       </CustomTabPanel>
     </Box>
   );
