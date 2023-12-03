@@ -58,7 +58,7 @@ export default function BasicTabs() {
       <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={0}>
         <DataTableMasuk/>
       </CustomTabPanel>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto' value={value} index={1}>
+      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={1}>
         <DataTableKeluar/>
       </CustomTabPanel>
     </Box>

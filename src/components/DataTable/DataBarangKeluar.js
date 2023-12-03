@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function DataTableKeluar() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [recordPerPage, setRecordPerPage] = useState(5); // Initially set to 5
+    const [recordPerPage, setRecordPerPage] = useState(5);
+    const [loading, setLoading] = useState(true);
     const lastIndex = currentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
     const records = Array.isArray(filteredData) ? filteredData.slice(firstIndex, lastIndex) : [];
@@ -18,16 +19,23 @@ export default function DataTableKeluar() {
 
     const getData = async () => {
         try {
-        const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam')
-                .then(
-                    response=> {
-                        console.log("Peminjaman",response.data.peminjaman)
-                        setData(response.data.peminjaman.peminjaman)
-                        setFilteredData(response.data.peminjaman)
-                });
+        const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        })
+        .then(
+            response=> {
+                console.log("Peminjaman",response.data.peminjaman)
+                setData(response.data.peminjaman.peminjaman)
+                setFilteredData(response.data.peminjaman)
+        });
             setData(response.data.peminjaman);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
         }
     };
     
@@ -70,46 +78,61 @@ export default function DataTableKeluar() {
                     <BsSearch className='relative right-7 top-2' size={15}/>
                 </div>
             </div>
-            <table>
-                <thead className='w-[86.5rem] h-[3.5rem] font-bold bg-[#F3F3F3]'>
-                    <tr>
-                        <th className='w-[18.625rem] pl-3 py-2 border-l-2 border-y-2 border-y-[#E8E8E8] text-left'>No</th>
-                        <th className='w-[88.625rem] py-2 border-bottom-2 border-[#e8e8e8] text-left'>Nama Aset</th>
-                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tag Number</th>
-                        <th className='w-[64.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Merek</th>
-                        <th className='w-[18.625rem] border-y-2 border-[#e8e8e8] text-left'>Tipe</th>
-                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nomor Seri</th>
-                        <th className='w-[108.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Penanggung Jawab Aset</th>
-                        <th className='w-[98.625rem] py-2 pl-[2rem] border-y-2 border-[#e8e8e8] text-left'>Lokasi Aset</th>
-                        <th className='w-[48.625rem] border-y-2 border-[#e8e8e8] text-left'>Kondisi Aset</th>
-                        <th className='w-[98.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tanggal Peminjaman</th>
-                        <td className='w-[88.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
-                        <td className='w-[78.625rem] border-y-2 border-[#e8e8e8]'>Diajukan Oleh</td>
-                        <td className='w-[48.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {records.map((item, index) => (
-                        <tr key={index}>
-                            <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+1+firstIndex}</td>
-                            <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
-                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
-                            <td className='w-[64.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.merek}</td>
-                            <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.tipe}</td>
-                            <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.nomor_seri}</td>
-                            <td className='w-[108.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
-                            <td className='w-[98.625rem] pl-[2rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
-                            <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
-                            <td className='w-[98.625rem] pl-[1rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
-                            <td className='w-[88.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
-                            <td className='w-[68.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_user.username}</td>
-                            <td className={`w-[48.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8] ${item.status === 'Pending' ? 'text-yellow-500' : (item.status === 'Approved' ? 'text-green-500' : 'text-red-500')}`}>
-                                {item.status}
-                            </td>
+            {
+              loading ? (
+                <div className="text-center mt-4">
+                  <ThreeDots type="ThreeDots" color="#555555" height={50} width={50} />
+                </div>
+              ) : (
+                <> { totalRecords == 0 ? (
+                  <div className='mt-4'>
+                    Tidak ada data.
+                  </div>
+                ) : (
+                  <table>
+                    <thead className='w-[86.5rem] h-[3.5rem] font-bold bg-[#F3F3F3]'>
+                        <tr>
+                            <th className='w-[18.625rem] pl-3 py-2 border-l-2 border-y-2 border-y-[#E8E8E8] text-left'>No</th>
+                            <th className='w-[88.625rem] py-2 border-bottom-2 border-[#e8e8e8] text-left'>Nama Aset</th>
+                            <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tag Number</th>
+                            <th className='w-[64.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Merek</th>
+                            <th className='w-[18.625rem] border-y-2 border-[#e8e8e8] text-left'>Tipe</th>
+                            <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nomor Seri</th>
+                            <th className='w-[108.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Penanggung Jawab Aset</th>
+                            <th className='w-[98.625rem] py-2 pl-[2rem] border-y-2 border-[#e8e8e8] text-left'>Lokasi Aset</th>
+                            <th className='w-[48.625rem] border-y-2 border-[#e8e8e8] text-left'>Kondisi Aset</th>
+                            <th className='w-[98.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tanggal Peminjaman</th>
+                            <td className='w-[88.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
+                            <td className='w-[78.625rem] border-y-2 border-[#e8e8e8]'>Diajukan Oleh</td>
+                            <td className='w-[48.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {records.map((item, index) => (
+                            <tr key={index}>
+                                <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+1+firstIndex}</td>
+                                <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
+                                <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
+                                <td className='w-[64.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.merek}</td>
+                                <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.tipe}</td>
+                                <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.nomor_seri}</td>
+                                <td className='w-[108.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
+                                <td className='w-[98.625rem] pl-[2rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
+                                <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
+                                <td className='w-[98.625rem] pl-[1rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
+                                <td className='w-[88.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
+                                <td className='w-[68.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_user.username}</td>
+                                <td className={`w-[48.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8] ${item.status === 'Pending' ? 'text-yellow-500' : (item.status === 'Approved' ? 'text-green-500' : 'text-red-500')}`}>
+                                    {item.status}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                )}
+                </>
+              )
+            }
             <nav className='z-10'>
                 <ul className= 'grid justify-items-stretch pagination'>
                     <div className='justify-self-start'>

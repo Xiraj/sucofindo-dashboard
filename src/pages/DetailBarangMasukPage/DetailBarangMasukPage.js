@@ -40,7 +40,7 @@ export default function DetailBarangMasukPage () {
   const handleAccept = async () => {
     try {
       const response = await axios.post(
-        `https://sima-rest-api.vercel.app/api/v1/aset/acceptPengembalia/${_id}`,
+        `https://sima-rest-api.vercel.app/api/v1/aset/acceptPengembalian/${_id}`,
         {
           adminId: userId,
         },
@@ -54,15 +54,11 @@ export default function DetailBarangMasukPage () {
   
       console.log('Accept Success', response.data);
   
-      localStorage.setItem('authToken', response.data.token);
-  
-      const accessToken = response.data.token;
-      _Accept(accessToken);
-      navigate('/Home');
+      navigate('/Barang-Masuk');
     } catch (error) { 
       console.error('Accept error', error);
     }
-  };
+  };    
 
   const handleDecline = async () => {
     try {
@@ -79,13 +75,9 @@ export default function DetailBarangMasukPage () {
         }
       );
   
-      console.log('Accept Success', response.data);
-  
-      localStorage.setItem('authToken', response.data.token);
-  
-      const accessToken = response.data.token;
-      _Accept(accessToken);
-      navigate('/Home');
+      console.log('Reject Success', response.data);
+
+      navigate('/Barang-Masuk');
     } catch (error) { 
       console.error('Accept error', error);
     }

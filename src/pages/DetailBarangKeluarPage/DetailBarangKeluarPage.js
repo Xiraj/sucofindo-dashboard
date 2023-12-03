@@ -54,22 +54,7 @@ export default function DetailBarangKeluarPage () {
     
         console.log('Accept Success', response.data);
     
-        console.log('Token before update:', localStorage.getItem('authToken'));
-    
-        const newToken = response.data.token;
-    
-        if (newToken) {
-          console.log('Token after update:', newToken);
-          localStorage.setItem('authToken', newToken);
-    
-          const accessToken = response.data.token;
-          _Accept(accessToken);
-    
-          // Wait for the token to be set before navigating
-          await navigate('/Barang-Keluar');
-        } else {
-          console.error('Token is undefined in the server response.');
-        }
+        navigate('/Barang-Keluar');
       } catch (error) { 
         console.error('Accept error', error);
       }
@@ -90,24 +75,9 @@ export default function DetailBarangKeluarPage () {
           }
         );
     
-        console.log('Accept Success', response.data);
-    
-        console.log('Token before update:', localStorage.getItem('authToken'));
-    
-        const newToken = response.data.token;
-    
-        if (newToken) {
-          console.log('Token after update:', newToken);
-          localStorage.setItem('authToken', newToken);
-    
-          const accessToken = response.data.token;
-          _Accept(accessToken);
-    
-          // Wait for the token to be set before navigating
-          await navigate('/Barang-Keluar');
-        } else {
-          console.error('Token is undefined in the server response.');
-        }
+        console.log('Reject Success', response.data);
+
+        navigate('/Barang-Keluar');
       } catch (error) { 
         console.error('Accept error', error);
       }

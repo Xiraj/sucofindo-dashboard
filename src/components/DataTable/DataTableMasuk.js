@@ -3,12 +3,14 @@ import axios from 'axios';
 import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function DataTableMasuk() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [recordPerPage, setRecordPerPage] = useState(5); // Initially set to 5
+    const [recordPerPage, setRecordPerPage] = useState(5);
+    const [loading, setLoading] = useState(true);
     const lastIndex = currentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
     const records = Array.isArray(filteredData) ? filteredData.slice(firstIndex, lastIndex) : [];
@@ -17,7 +19,12 @@ export default function DataTableMasuk() {
 
 const getData = async () => {
         try {
-            const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/peminjamanHistory')
+            const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/peminjamanHistory', {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+              },
+            })
                 .then(
                     response=> {
                         console.log("Peminjaman",response.data.peminjamanHistory)
@@ -27,6 +34,8 @@ const getData = async () => {
             setData(response.data.peminjamanHistory);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -49,7 +58,7 @@ const getData = async () => {
     const handleItemsPerPageChange = (event) => {
         const newItemsPerPage = parseInt(event.target.value, 10);
         setRecordPerPage(newItemsPerPage);
-        setCurrentPage(1); // Reset to the first page when changing the number of items per page
+        setCurrentPage(1);
     };
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -59,7 +68,7 @@ const getData = async () => {
     return (
         <div className='w-full md:w-[107.5rem] mx-auto overflow-y-auto overflow-x-auto md:mr-[2.5rem]'>
             <div className='flex justify-start mt-4 mb-4'>
-                <div className='flex'>
+              <div className='flex'>
                     <input 
                         className='bg-transparent border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none ' 
                         type='text' 
@@ -69,42 +78,57 @@ const getData = async () => {
                     <BsSearch className='relative right-7 top-2' size={15}/>
                 </div>
             </div>
-            <table>
-                <thead className='font-bold w-[66.5rem] h-[3.5rem] bg-[#F3F3F3]'>
-                    <tr>
-                        <td className='w-[1.5rem] pl-3 border-l-2 border-y-2 border-y-[#E8E8E8]'>No</td>
-                        <td className='w-[58.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>Nama Asset</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Tag Number</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Merek</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Tipe</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Nomor Seri</td>
-                        <td className='w-[102.625rem] border-y-2 border-[#e8e8e8]'>Penanggung Jawab Aset</td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Lokasi Aset</td>
-                        <td className='w-[68.625rem] border-y-2 border-[#e8e8e8]'>Kondisi Aset</td>
-                        <td className='w-[79.625rem] border-y-2 border-[#e8e8e8]'>Tanggal Peminjaman</td>
-                        <td className='w-[58.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
-                        <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Jenis</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {records.map((item, index) => (
-                        <tr key={index}>
-                            <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+firstIndex+1}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.nama_alat || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.tag_number || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.merek || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.tipe || '-'}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.nomor_seri || '-'}</td>
-                            <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.penanggung_jawab || '-'}</td>
-                            <td className='w-[20.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.lokasi|| '-'}</td>
-                            <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.kondisi_aset|| '-'}</td>
-                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tanggal_peminjaman || '-'}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tujuan_peminjaman || '-'}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.jenis || '-'}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {
+                loading ? (
+                  <div className="text-center mt-4">
+                    <ThreeDots type="ThreeDots" color="#555555" height={50} width={50} />
+                  </div>
+                ) : (
+                  <> { totalRecords == 0 ? (
+                    <div className='mt-4'>
+                      Tidak ada data.
+                    </div>
+                  ) : (
+                    <table>
+                      <thead className='font-bold w-[66.5rem] h-[3.5rem] bg-[#F3F3F3]'>
+                          <tr>
+                              <td className='w-[1.5rem] pl-3 border-l-2 border-y-2 border-y-[#E8E8E8]'>No</td>
+                              <td className='w-[58.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>Nama Asset</td>
+                              <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Tag Number</td>
+                              <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Merek</td>
+                              <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Tipe</td>
+                              <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Nomor Seri</td>
+                              <td className='w-[102.625rem] border-y-2 border-[#e8e8e8]'>Penanggung Jawab Aset</td>
+                              <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>Lokasi Aset</td>
+                              <td className='w-[68.625rem] border-y-2 border-[#e8e8e8]'>Kondisi Aset</td>
+                              <td className='w-[79.625rem] border-y-2 border-[#e8e8e8]'>Tanggal Peminjaman</td>
+                              <td className='w-[58.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
+                              <td className='w-[78.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Disetujui Oleh</td>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {records.map((item, index) => (
+                              <tr key={index}>
+                                  <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+firstIndex+1}</td>
+                                  <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.nama_alat || '-'}</td>
+                                  <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.tag_number || '-'}</td>
+                                  <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.merek || '-'}</td>
+                                  <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.tipe || '-'}</td>
+                                  <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.nomor_seri || '-'}</td>
+                                  <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.penanggung_jawab || '-'}</td>
+                                  <td className='w-[20.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.lokasi|| '-'}</td>
+                                  <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.kondisi_aset|| '-'}</td>
+                                  <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tanggal_peminjaman || '-'}</td>
+                                  <td className='w-[98.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tujuan_peminjaman || '-'}</td>
+                                  <td className='w-[98.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>{item.id_admin?.username || '-'}</td>
+                              </tr>
+                          ))}
+                      </tbody>
+                  </table>
+                  )}
+                  </>     
+                )
+            }
             <nav className='z-10'>
                 <ul className= 'grid justify-items-stretch pagination'>
                     <div className='justify-self-start'>

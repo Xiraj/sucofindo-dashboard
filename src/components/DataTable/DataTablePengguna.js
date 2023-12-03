@@ -18,7 +18,12 @@ export default function DataTablePengguna() {
 
     const getData = async () => {
         try {
-            const response = await axios.get("https://sima-rest-api.vercel.app/api/v1/auth/users")
+            const response = await axios.get("https://sima-rest-api.vercel.app/api/v1/auth/users", {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+              },
+            })
                 .then(
                     response=> {
                         setData(response.data.data)

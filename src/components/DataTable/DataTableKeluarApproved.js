@@ -3,12 +3,14 @@ import axios from 'axios';
 import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function DataTableKeluarApproved() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [recordPerPage, setRecordPerPage] = useState(5); // Initially set to 5
+    const [recordPerPage, setRecordPerPage] = useState(5);
+    const [loading, setLoading] = useState(true);
     const lastIndex = currentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
     const records = Array.isArray(filteredData) ? filteredData.slice(firstIndex, lastIndex) : [];
@@ -17,7 +19,12 @@ export default function DataTableKeluarApproved() {
 
     const getData = async (status) => {
         try {
-            const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam?status=${status}`);
+            const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam?status=${status}`, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+              },
+            });
             
             console.log("Peminjaman", response.data.peminjaman);
             
@@ -26,11 +33,13 @@ export default function DataTableKeluarApproved() {
             setFilteredData(filteredData);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
         }
     };
     
     useEffect(() => {
-        getData('Approved'); // Fetch and display data with 'Decline' status
+        getData('Approved');
     }, []);
 
     const Filter = (event) => {
@@ -48,7 +57,7 @@ export default function DataTableKeluarApproved() {
     const handleItemsPerPageChange = (event) => {
         const newItemsPerPage = parseInt(event.target.value, 10);
         setRecordPerPage(newItemsPerPage);
-        setCurrentPage(1); // Reset to the first page when changing the number of items per page
+        setCurrentPage(1);
     };
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -67,42 +76,58 @@ export default function DataTableKeluarApproved() {
                     <BsSearch className='relative right-7 top-2' size={15}/>
                 </div>
             </div>
-            <table>
-                <thead className='w-[86.5rem] h-[3.5rem] font-bold bg-[#F3F3F3]'>
-                    <tr>
-                        <th className='w-[18.625rem] pl-3 py-2 border-l-2 border-y-2 border-y-[#E8E8E8] text-left'>No</th>
-                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nama Aset</th>
-                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tag Number</th>
-                        <th className='w-[4.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Merek</th>
-                        <th className='w-[18.625rem] border-y-2 border-[#e8e8e8] text-left'>Tipe</th>
-                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nomor Seri</th>
-                        <th className='w-[80.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Penanggung Jawab Aset</th>
-                        <th className='w-[98.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Lokasi Aset</th>
-                        <th className='w-[48.625rem] border-y-2 border-[#e8e8e8] text-left'>Kondisi Aset</th>
-                        <th className='w-[58.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tanggal Peminjaman</th>
-                        <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tujuan Peminjaman</th>
-                        <td className='w-[48.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {records.map((item, index) => (
-                        <tr key={index}>
-                            <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+1+firstIndex}</td>
-                            <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
-                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
-                            <td className='w-[54.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.merek}</td>
-                            <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.tipe}</td>
-                            <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.nomor_seri}</td>
-                            <td className='w-[80.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
-                            <td className='w-[98.625rem] h-[3.5rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
-                            <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
-                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
-                            <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
-                            <td className='w-[48.625rem] h-[3.5rem] text-green-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {
+              loading ? (
+                <div className="text-center mt-4">
+                  <ThreeDots type="ThreeDots" color="#555555" height={50} width={50} />
+                </div>
+              ) : (
+                <>
+                  {totalRecords == 0 ? (
+                    <div className='mt-4'>
+                      Tidak ada data.
+                    </div>
+                  ) : (
+                    <table>
+                      <thead className='w-[86.5rem] h-[3.5rem] font-bold bg-[#F3F3F3]'>
+                          <tr>
+                              <th className='w-[18.625rem] pl-3 py-2 border-l-2 border-y-2 border-y-[#E8E8E8] text-left'>No</th>
+                              <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nama Aset</th>
+                              <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tag Number</th>
+                              <th className='w-[4.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Merek</th>
+                              <th className='w-[18.625rem] border-y-2 border-[#e8e8e8] text-left'>Tipe</th>
+                              <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Nomor Seri</th>
+                              <th className='w-[80.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Penanggung Jawab Aset</th>
+                              <th className='w-[98.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Lokasi Aset</th>
+                              <th className='w-[48.625rem] border-y-2 border-[#e8e8e8] text-left'>Kondisi Aset</th>
+                              <th className='w-[58.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tanggal Peminjaman</th>
+                              <th className='w-[48.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tujuan Peminjaman</th>
+                              <td className='w-[48.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          {records.map((item, index) => (
+                              <tr key={index}>
+                                  <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+1+firstIndex}</td>
+                                  <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
+                                  <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
+                                  <td className='w-[54.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.merek}</td>
+                                  <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.tipe}</td>
+                                  <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.nomor_seri}</td>
+                                  <td className='w-[80.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
+                                  <td className='w-[98.625rem] h-[3.5rem] pl-[1.25rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
+                                  <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
+                                  <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
+                                  <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
+                                  <td className='w-[48.625rem] h-[3.5rem] text-green-500 border-r-2 border-y-2 border-[#e8e8e8]'>{item.status}</td>
+                              </tr>
+                          ))}
+                      </tbody>
+                  </table>
+                  )}
+                </>
+              )
+            }
             <nav className='z-10'>
                 <ul className= 'grid justify-items-stretch pagination'>
                     <div className='justify-self-start'>

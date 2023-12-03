@@ -18,7 +18,12 @@ function DataAset() {
 
     const getData = async () => {
         try {
-            const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/data/aset')
+            const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/data/aset', {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+              },
+            })
                 .then(
                     response=> {
                         setData(response.data.data)
