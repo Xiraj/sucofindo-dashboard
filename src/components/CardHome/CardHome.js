@@ -31,7 +31,12 @@ export default function CardAset () {
       };
 
       useEffect(() => {
-        axios.get('https://sima-rest-api.vercel.app/api/v1/data/aset')
+        axios.get('https://sima-rest-api.vercel.app/api/v1/data/aset', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        })
           .then((response) => {
             setData(response.data.data);
             console.log(response.data.data)

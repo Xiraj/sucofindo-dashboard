@@ -9,7 +9,7 @@ function DataAset() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [recordPerPage, setRecordPerPage] = useState(5); // Initially set to 5
+    const [recordPerPage, setRecordPerPage] = useState(5);
     const lastIndex = currentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
     const records = Array.isArray(filteredData) ? filteredData.slice(firstIndex, lastIndex) : [];

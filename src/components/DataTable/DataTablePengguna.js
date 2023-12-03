@@ -26,8 +26,8 @@ export default function DataTablePengguna() {
             })
                 .then(
                     response=> {
-                        setData(response.data.data)
-                        setFilteredData(response.data.data)
+                        setData(response.data)
+                        setFilteredData(response.data)
                 });
             setData(response.data.data);
         } catch (error) {
