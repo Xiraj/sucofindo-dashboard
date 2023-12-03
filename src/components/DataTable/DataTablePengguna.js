@@ -4,39 +4,43 @@ import { Box } from "@mui/material";
 import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
+import { ThreeDots } from 'react-loader-spinner';
 
 export default function DataTablePengguna() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [recordPerPage, setRecordPerPage] = useState(5); // Initially set to 5
+    const [recordPerPage, setRecordPerPage] = useState(5);
+    const [loading, setLoading] = useState(true);
     const lastIndex = currentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
     const records = Array.isArray(filteredData) ? filteredData.slice(firstIndex, lastIndex) : [];
     const totalRecords = Array.isArray(filteredData) ? filteredData.length : 0;
     const totalPages = Math.ceil(totalRecords / recordPerPage);
 
-    const getData = async () => {
-        try {
-            const response = await axios.get("https://sima-rest-api.vercel.app/api/v1/auth/users", {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
-              },
-            })
-                .then(
-                    response=> {
-                        setData(response.data)
-                        setFilteredData(response.data)
-                });
-            setData(response.data.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+    const getData = async (role) => {
+      try {
+          const response = await axios.get(`https://sima-rest-api.vercel.app/api/v1/auth/users?=role${role}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            },
+          });
+          
+          console.log("Peminjaman", response.data);
+          
+          const filteredData = response.data.filter(item => item.role === role);
+          setData(filteredData);
+          setFilteredData(filteredData);
+      } catch (error) {
+          console.error('Error fetching data:', error);
+      } finally {
+          setLoading(false);
+      }
+  };
 
     useEffect(() => {
-        getData();
+        getData('user');
     }, []);
 
      const Filter = (event) => {
@@ -54,7 +58,7 @@ export default function DataTablePengguna() {
     const handleItemsPerPageChange = (event) => {
         const newItemsPerPage = parseInt(event.target.value, 10);
         setRecordPerPage(newItemsPerPage);
-        setCurrentPage(1); // Reset to the first page when changing the number of items per page
+        setCurrentPage(1);
     };
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -73,36 +77,52 @@ export default function DataTablePengguna() {
                     <BsSearch className='relative right-7 top-2' size={15}/>
                 </div>
             </div>
-            <table className='container'>
-                <thead className='w-[62.5rem] h-[3.5rem] bg-[#F3F3F3]'>
-                    <tr>
-                        <td className='w-[1.5rem] pl-2 border-l-2 border-y-2 border-y-[#E8E8E8]'>
-                            No
-                        </td>
-                        <td className='w-[18.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>
-                            Nama
-                        </td>
-                        <td className='w-[20.625rem] border-y-2 border-[#e8e8e8]'>
-                            Email
-                        </td>
-                        <td className='w-[20.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>
-                            Tanggal Terdaftar 
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {records.map((item, index) => (
-                        <tr key={index+1}>
-                            <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+firstIndex+1}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.username}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.email}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>
-                                {new Date(item.createdAt).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
-                             </td>
+            {
+              loading ? (
+                <div className="text-center mt-4">
+                  <ThreeDots type="ThreeDots" color="#555555" height={50} width={50} />
+                </div>
+              ) : (
+                <> {totalRecords == 0 ? (
+                  <div className='mt-4'>
+                    Tidak ada data.
+                  </div>
+                ) : (
+                  <table className='container'>
+                    <thead className='w-[62.5rem] h-[3.5rem] bg-[#F3F3F3]'>
+                        <tr>
+                            <td className='w-[1.5rem] pl-2 border-l-2 border-y-2 border-y-[#E8E8E8]'>
+                                No
+                            </td>
+                            <td className='w-[18.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>
+                                Nama
+                            </td>
+                            <td className='w-[20.625rem] border-y-2 border-[#e8e8e8]'>
+                                Email
+                            </td>
+                            <td className='w-[20.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>
+                                Tanggal Terdaftar 
+                            </td>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {records.map((item, index) => (
+                            <tr key={index+1}>
+                                <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+firstIndex+1}</td>
+                                <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.username}</td>
+                                <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.email}</td>
+                                <td className='w-[18.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8]'>
+                                    {new Date(item.createdAt).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                )}
+                </>
+                
+              )
+            }
             <nav className='z-10'>
                 <ul className= 'grid justify-items-stretch  pagination'>
                     <div className='justify-self-start'>

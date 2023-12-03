@@ -4,12 +4,14 @@ import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsFillPlusSquareFill, BsSearch } from 'react-icons/bs';
 import PopupForm from '../PopUp/PopUp';
+import { ThreeDots } from 'react-loader-spinner';
 
 function DataAset() {
     const [data, setData] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [recordPerPage, setRecordPerPage] = useState(5);
+    const [loading, setLoading] = useState(true);
     const lastIndex = currentPage * recordPerPage;
     const firstIndex = lastIndex - recordPerPage;
     const records = Array.isArray(filteredData) ? filteredData.slice(firstIndex, lastIndex) : [];
@@ -33,6 +35,8 @@ function DataAset() {
             
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+          setLoading(false);
         }
     };
     useEffect(() => {
@@ -101,51 +105,65 @@ function DataAset() {
 
                 <PopupForm isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} onSubmit={handleFormSubmit} />
             </div>
-            <table>
-                
-                <thead className='w-[66.5rem] h-[3.5rem] bg-[#F3F3F3]'>
-                    <tr>
-                        <td className='w-[1.5rem] pl-3 border-l-2 border-y-2 border-y-[#E8E8E8]'>
-                            No
-                        </td>
-                        <td className='w-[58.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>
-                            Nama Aset
-                        </td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>
-                            Tag Number
-                        </td>
-                        <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>
-                            Serial Number
-                        </td>
-                        <td className='w-[40.625rem] border-y-2 border-[#e8e8e8]'>
-                            Merek
-                        </td>
-                        <td className='w-[40.625rem] border-y-2 border-[#e8e8e8]'>
-                            Tipe
-                        </td>
-                        <td className='w-[40.625rem] border-y-2 border-[#e8e8e8]'>
-                            Lokasi Aset
-                        </td>
-                        <td className='w-[32.625rem] border-y-2 border-[#e8e8e8]'>
-                            Penanggung Jawab
-                        </td>
-                    </tr>
-                </thead>
-                <tbody>
-                    {records.map((item, id) => (
-                        <tr key={id}>
-                            <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{id+firstIndex+1}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.nama_alat}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tag_number}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.nomor_seri}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.merek}</td>
-                            <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tipe}</td>
-                            <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.lokasi_aset}</td>
-                            <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.penanggung_jawab}</td>
+            {
+              loading ? (
+                <div className="text-center mt-4">
+                  <ThreeDots type="ThreeDots" color="#555555" height={50} width={50} />
+                </div>
+              ) : (
+                <> {totalRecords == 0 ? (
+                  <div className='mt-4'>
+                    Tidak ada data.
+                  </div>
+                ) : (
+                  <table>
+                    <thead className='w-[66.5rem] h-[3.5rem] bg-[#F3F3F3]'>
+                        <tr>
+                            <td className='w-[1.5rem] pl-3 border-l-2 border-y-2 border-y-[#E8E8E8]'>
+                                No
+                            </td>
+                            <td className='w-[58.625rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>
+                                Nama Aset
+                            </td>
+                            <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>
+                                Tag Number
+                            </td>
+                            <td className='w-[50.625rem] border-y-2 border-[#e8e8e8]'>
+                                Serial Number
+                            </td>
+                            <td className='w-[40.625rem] border-y-2 border-[#e8e8e8]'>
+                                Merek
+                            </td>
+                            <td className='w-[40.625rem] border-y-2 border-[#e8e8e8]'>
+                                Tipe
+                            </td>
+                            <td className='w-[40.625rem] border-y-2 border-[#e8e8e8]'>
+                                Lokasi Aset
+                            </td>
+                            <td className='w-[32.625rem] border-y-2 border-[#e8e8e8]'>
+                                Penanggung Jawab
+                            </td>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {records.map((item, id) => (
+                            <tr key={id}>
+                                <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{id+firstIndex+1}</td>
+                                <td className='w-[18.625rem] h-[3.5rem] pl-[2rem] border-y-2 border-[#e8e8e8]'>{item.nama_alat}</td>
+                                <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tag_number}</td>
+                                <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.nomor_seri}</td>
+                                <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.merek}</td>
+                                <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tipe}</td>
+                                <td className='w-[18.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.lokasi_aset}</td>
+                                <td className='w-[50.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.penanggung_jawab}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                )}
+                </>
+              )
+            }
             <nav className='z-10'>
                 <ul className= 'grid justify-items-stretch mt-5 mb-3 pagination'>
                     <div className='justify-self-start'>

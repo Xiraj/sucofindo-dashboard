@@ -60,25 +60,37 @@
       e.preventDefault();
     
       try {
-        const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/auth/signOut', {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
-          },
-        });
+        // Make the request to log out
+        const response = await axios.post(
+          'https://sima-rest-api.vercel.app/api/v1/auth/signOut',
+          {},
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            },
+          }
+        );
     
-        console.log('Logout successful', response.data);
-        localStorage.clear()
-        navigate('/Login');
-      } catch (error) { 
+        if (response.status === 200) {
+          console.log('Logout successful', response.data);
+    
+          localStorage.clear();
+    
+          navigate('/Login');
+          toast('Logout Berhasil!');
+        } else {
+          console.error('Logout failed', response.data);
+          setError('Logout Gagal');
+        }
+      } catch (error) {
         console.error('Logout error', error);
         setError('Logout Gagal');
       }
-    };
-
-    const notify = () => toast("Barang Keluar", "(", " ", ")");
+    };    
 
     return (
+      <>
       <AppBar position="static" sx={{ backgroundColor: 'white' }}>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
@@ -89,7 +101,6 @@
                     size="small"
                     aria-label="show 17 new notifications"
                     color="inherit"
-                    onClick={notify}
                   >
                     <Badge badgeContent={1} color="error">
                       <FaRegBell color='#4E73DF' size={26}/>
@@ -133,6 +144,8 @@
           </Toolbar>
         </Container>
       </AppBar>
+      <ToastContainer/>
+      </>
     );
   }
 

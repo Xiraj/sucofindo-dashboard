@@ -3,6 +3,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../Context';
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function LoginForm() {
   const [showPass, setShowPass] = useState(false);
@@ -32,7 +33,7 @@ export default function LoginForm() {
   
       console.log('Login successful', response.data);
 
-      const { token, user } = response.data;
+      const { user } = response.data;
 
       if (user.role !== 'admin' && user.role !== 'superAdmin') {
         setError('Anda tidak memiliki izin untuk masuk.');
@@ -43,6 +44,9 @@ export default function LoginForm() {
   
       const accessToken = response.data.token;
       _Login(accessToken);
+      toast.success('Login Berhasil!', {
+        position: toast.POSITION.TOP_RIGHT,
+      });
       navigate('/Home');
     } catch (error) { 
       console.error('Login error', error);
@@ -50,8 +54,6 @@ export default function LoginForm() {
     }
   };
   
-  
-
   return (
     <div>
       <form onSubmit={handleLogin}>
@@ -85,6 +87,7 @@ export default function LoginForm() {
           </button>
         </div>
       </form>
+      <ToastContainer/>
     </div>
   );
 }

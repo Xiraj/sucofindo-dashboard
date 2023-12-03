@@ -19,7 +19,7 @@ export default function DataTableKeluar() {
 
     const getData = async () => {
         try {
-        const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam', {
+        const response = await axios.get('https://sima-rest-api.vercel.app/api/v1/aset/peminjamanHistory', {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
@@ -27,11 +27,11 @@ export default function DataTableKeluar() {
         })
         .then(
             response=> {
-                console.log("Peminjaman",response.data.peminjaman)
-                setData(response.data.peminjaman.peminjaman)
-                setFilteredData(response.data.peminjaman)
+                console.log("Peminjaman",response.data.peminjamanHistory)
+                setData(response.data.peminjamanHistory)
+                setFilteredData(response.data.peminjamanHistory)
         });
-            setData(response.data.peminjaman);
+            setData(response.data.peminjamanHistory);
         } catch (error) {
             console.error('Error fetching data:', error);
         } finally {
@@ -59,7 +59,7 @@ export default function DataTableKeluar() {
     const handleItemsPerPageChange = (event) => {
         const newItemsPerPage = parseInt(event.target.value, 10);
         setRecordPerPage(newItemsPerPage);
-        setCurrentPage(1); // Reset to the first page when changing the number of items per page
+        setCurrentPage(1);
     };
     const pageNumbers = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -104,26 +104,28 @@ export default function DataTableKeluar() {
                             <th className='w-[98.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left'>Tanggal Peminjaman</th>
                             <td className='w-[88.625rem] border-y-2 border-[#e8e8e8]'>Tujuan Peminjaman</td>
                             <td className='w-[78.625rem] border-y-2 border-[#e8e8e8]'>Diajukan Oleh</td>
-                            <td className='w-[48.625rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
+                            <td className='w-[78.625rem] border-y-2 border-[#e8e8e8]'>Admin</td>
+                            <td className='w-[58.625rem] pl-[1rem] border-r-2 border-y-2 border-[#e8e8e8]'>Status</td>
                         </tr>
                     </thead>
                     <tbody>
                         {records.map((item, index) => (
                             <tr key={index}>
                                 <td className='w-[1.8rem] h-[3.5rem] pl-[1rem] border-l-2 border-y-2 border-y-[#E8E8E8]'>{index+1+firstIndex}</td>
-                                <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.nama_alat}</td>
-                                <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.tag_number}</td>
-                                <td className='w-[64.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.merek}</td>
-                                <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.tipe}</td>
-                                <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_aset.nomor_seri}</td>
-                                <td className='w-[108.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.penanggung_jawab}</td>
-                                <td className='w-[98.625rem] pl-[2rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_aset.lokasi_aset}</td>
-                                <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.kondisi_aset}</td>
-                                <td className='w-[98.625rem] pl-[1rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tanggal_peminjaman}</td>
-                                <td className='w-[88.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.tujuan_peminjaman}</td>
+                                <td className='w-[78.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.nama_alat}</td>
+                                <td className='w-[58.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.tag_number}</td>
+                                <td className='w-[64.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_peminjaman?.id_aset?.merek}</td>
+                                <td className='w-[38.625rem] border-y-2 border-[#e8e8e8] text-left'>{item.id_peminjaman?.id_aset?.tipe}</td>
+                                <td className='w-[20.625rem] py-2 border-y-2 border-[#e8e8e8] text-left'>{item.id_peminjaman?.id_aset?.nomor_seri}</td>
+                                <td className='w-[108.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.id_aset?.penanggung_jawab}</td>
+                                <td className='w-[98.625rem] pl-[2rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.lokasi}</td>
+                                <td className='w-[48.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.kondisi_aset}</td>
+                                <td className='w-[98.625rem] pl-[1rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tanggal_peminjaman}</td>
+                                <td className='w-[88.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_peminjaman?.tujuan_peminjaman}</td>
                                 <td className='w-[68.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_user.username}</td>
-                                <td className={`w-[48.625rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8] ${item.status === 'Pending' ? 'text-yellow-500' : (item.status === 'Approved' ? 'text-green-500' : 'text-red-500')}`}>
-                                    {item.status}
+                                <td className='w-[68.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]'>{item.id_admin.username}</td>
+                                <td className={`w-[58.625rem] pl-[1rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8] ${item.id_peminjaman?.status === 'Pending' ? 'text-yellow-500' : (item.id_peminjaman?.status === 'Approved' ? 'text-green-500' : 'text-red-500')}`}>
+                                    {item.id_peminjaman?.status}
                                 </td>
                             </tr>
                         ))}

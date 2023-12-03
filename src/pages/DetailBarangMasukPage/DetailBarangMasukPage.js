@@ -1,14 +1,13 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import ImageView from "../../components/ImageView";
 import axios from "axios";
-import AuthContext from "../../components/Context";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function DetailBarangMasukPage () {
   const { _id } = useParams([]);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const {_Accept} = useContext(AuthContext);
   const [userId, setUserId] = useState();
 
   useEffect(() => {
@@ -53,7 +52,9 @@ export default function DetailBarangMasukPage () {
       );
   
       console.log('Accept Success', response.data);
-  
+      toast.success('Pengembalian Diterima!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      })
       navigate('/Barang-Masuk');
     } catch (error) { 
       console.error('Accept error', error);
@@ -76,7 +77,9 @@ export default function DetailBarangMasukPage () {
       );
   
       console.log('Reject Success', response.data);
-
+      toast.success('Pengembalian Ditolak!', {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      })
       navigate('/Barang-Masuk');
     } catch (error) { 
       console.error('Accept error', error);

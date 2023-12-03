@@ -84,8 +84,8 @@ export default function DataTableKeluarRejected() {
               ) : (
                 <> {totalRecords == 0 ? (
                     <div className="mt-4">
-                        Tidak ada data.
-                      </div>
+                      Tidak ada data.
+                    </div>
                 ) : (
                     <table>
                         <thead className='w-[86.5rem] h-[3.5rem] font-bold bg-[#F3F3F3]'>
