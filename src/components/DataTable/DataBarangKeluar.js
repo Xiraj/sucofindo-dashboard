@@ -41,7 +41,7 @@ export default function DataTableKeluar() {
     
     const Filter = (event) => {
         const searchTerm = event.target.value.toLowerCase();
-        const filtered = data.filter((item) => item.id_aset.nama_alat.toLowerCase().includes(searchTerm));
+        const filtered = data.filter((item) => item.id_peminjaman?.id_aset?.nama_alat.toLowerCase().includes(searchTerm));
         setFilteredData(filtered);
         setCurrentPage(1);
     }
