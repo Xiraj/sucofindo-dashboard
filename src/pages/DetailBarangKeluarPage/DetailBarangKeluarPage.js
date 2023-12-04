@@ -24,7 +24,12 @@ export default function DetailBarangKeluarPage () {
           setUserId(userId);
           console.log("User ID:", userId);
     
-          const asetResponse = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam/${_id}`);
+          const asetResponse = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam/${_id}`, {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+            },
+          });
           const asetData = asetResponse.data.peminjaman;
           setData(asetData);
           console.log("Aset Data:", asetData);
@@ -52,7 +57,7 @@ export default function DetailBarangKeluarPage () {
         );
     
         console.log('Accept Success', response.data);
-        toast.success('Peminjaman Diterima!', {
+        toast('Peminjaman Diterima!', {
           position: toast.POSITION.BOTTOM_RIGHT,
         })
         navigate('/Barang-Keluar');
@@ -77,7 +82,7 @@ export default function DetailBarangKeluarPage () {
         );
     
         console.log('Reject Success', response.data);
-        toast.success('Peminjaman Ditolak!', {
+        toast('Peminjaman Ditolak!', {
           position: toast.POSITION.BOTTOM_RIGHT,
         })          
         navigate('/Barang-Keluar');

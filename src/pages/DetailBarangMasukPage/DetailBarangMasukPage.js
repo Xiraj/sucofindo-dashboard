@@ -24,7 +24,12 @@ export default function DetailBarangMasukPage () {
         setUserId(userId);
         console.log("User ID:", userId);
   
-        const asetResponse = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPengembali/${_id}`);
+        const asetResponse = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPengembali/${_id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
+          },
+        });
         const asetData = asetResponse.data.pengembalian;
         setData(asetData);
         console.log("Aset Data:", asetData);
