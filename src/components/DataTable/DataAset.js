@@ -33,7 +33,9 @@ function DataAset() {
   const deleteData = async () => {
     if (deleteItemId) {
       await axios
-        .delete(`https://sima-rest-api.vercel.app/api/v1/data/deleteAset/${deleteItemId}`)
+        .delete(
+          `https://sima-rest-api.vercel.app/api/v1/data/deleteAset/${deleteItemId}`
+        )
         .then((response) => {
         });
       setShowRemoveModal(false);
@@ -104,9 +106,9 @@ function DataAset() {
         <div className="flex justify-start">
           <div className="flex justify-start relative top-6">
             <input
-              className="bg-transparent border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none "
+              className="bg-transparent pl-4 border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none "
               type="text"
-              placeholder="   Masukkan Nama Aset"
+              placeholder="Masukkan Nama Aset"
               onChange={Filter}
             />
             <BsSearch className="relative right-7 top-2" size={15} />
@@ -142,7 +144,7 @@ function DataAset() {
       ) : (
         <>
           {" "}
-          {totalRecords == 0 ? (
+          {totalRecords === 0 ? (
             <div className="mt-4">Tidak ada data.</div>
           ) : (
             <table>
@@ -219,30 +221,30 @@ function DataAset() {
                         </button>
 
                         {showRemoveModal && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto">
-                <div className="relative bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
-                  <div className="p-6 text-center">
-                    <h3 className="mb-5 text-lg font-normal text-gray-500">
-                      Are you sure you want to delete?
-                    </h3>
-                    <button
-                      onClick={deleteData}
-                      type="button"
-                      className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
-                    >
-                      Ok
-                    </button>
-                    <button
-                      onClick={() => setShowRemoveModal(false)}
-                      type="button"
-                      className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
+                          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto">
+                            <div className="relative bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
+                              <div className="p-6 text-center">
+                                <h3 className="mb-5 text-lg font-normal text-gray-500">
+                                  Are you sure you want to delete?
+                                </h3>
+                                <button
+                                  onClick={deleteData}
+                                  type="button"
+                                  className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                                >
+                                  Ok
+                                </button>
+                                <button
+                                  onClick={() => setShowRemoveModal(false)}
+                                  type="button"
+                                  className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </td>
                   </tr>

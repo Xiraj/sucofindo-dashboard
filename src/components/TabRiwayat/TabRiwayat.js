@@ -1,11 +1,11 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import DataTableMasuk from '../DataTable/DataTableMasuk';
-import DataTableKeluar from '../DataTable/DataBarangKeluar';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import DataTableMasuk from "../DataTable/DataTableMasuk";
+import DataTableKeluar from "../DataTable/DataBarangKeluar";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,7 +36,7 @@ CustomTabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -48,18 +48,26 @@ export default function BasicTabs() {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: "100%" }}>
       <Box>
         <Tabs value={value} onChange={handleChange}>
           <Tab label="Peminjaman" {...a11yProps(0)} />
           <Tab label="Pengembalian" {...a11yProps(1)} />
         </Tabs>
       </Box>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={0}>
-        <DataTableKeluar/>
+      <CustomTabPanel
+        className="md:w-[60rem] overflow-x-auto pr-10 pt-7"
+        value={value}
+        index={0}
+      >
+        <DataTableKeluar />
       </CustomTabPanel>
-      <CustomTabPanel className='md:w-[60rem] overflow-x-auto pr-10 pt-7' value={value} index={1}>
-        <DataTableMasuk/>
+      <CustomTabPanel
+        className="md:w-[60rem] overflow-x-auto pr-10 pt-7"
+        value={value}
+        index={1}
+      >
+        <DataTableMasuk />
       </CustomTabPanel>
     </Box>
   );

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import axios from "axios";
-import { format } from 'date-fns';
 
 export default function Notification() {
   const [notificationCount, setNotificationCount] = useState([]);
@@ -83,8 +82,8 @@ useEffect(() => {
         </div>
         <div className="w-[750px] grid grid-col justify-start">
           <h1 className="text-zinc-600">
-            {item.tanggal_peminjaman && format(new Date(item.tanggal_peminjaman), 'MM/dd/yyyy')}
-            {item.tanggal_pengembalian && format(new Date(item.tanggal_pengembalian), 'MM/dd/yyyy')}
+            {item.tanggal_peminjaman}
+            {item.tanggal_pengembalian}
           </h1>
           <h1 className="text-black relative left-[14px]">{item.id_aset?.tag_number}</h1>
         </div>
