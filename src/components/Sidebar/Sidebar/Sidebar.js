@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from "@mui/material";
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import SucofindoLogo from '../../../assets/logo-sucofindo.png';
 import { BsArrowLeftCircleFill } from 'react-icons/bs';
 import { FaFolder, FaHome } from 'react-icons/fa';
@@ -8,6 +8,7 @@ import { RiFolderDownloadFill, RiFolderUploadFill, RiFolderHistoryFill } from 'r
 import axios from 'axios';
 
 export default function Sidebar() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [role, setRole] = useState('');
   const [loading, setLoading] = useState(true);
@@ -98,9 +99,16 @@ export default function Sidebar() {
 
     return menuItemsByRole[userRole] || [];
   };
+  const handleSidebarToggle = () => {
+    setOpen(!open);
+  };
+
+  const handleButtonClick = (to) => {
+    handleSidebarToggle();
+    navigate(to);
+  };
 
   const menuItems = getMenuItems();
-
   return (
     <aside className='flex z-10'>
       <Box className={`${open ? "w-[16.8rem]" : "w-[8rem]"} duration-300 bg-main-color border-white`}>
@@ -142,16 +150,21 @@ export default function Sidebar() {
             <ul className='ml-[1.5rem] mt-[2rem]'>
               {menuItems.map((item, i) => (
                 <li key={i} className='flex'>
-                  {item.icon}
-                  <Link
-                    className={`ml-[0.75rem] text-[#E8E8E8] font-extralight hover:font-medium hover:text-white mb-[2rem] ${!open && 'opacity-0 translate-x-28 overflow-hidden'}`}
+                <Link
+                    className=''
                     to={`${open ? item.to : item.to}`}
-                    style={{
-                      transitionDelay: `${i + 3}00ms`,
-                    }}
                   >
-                    {item.label}
+                    {item.icon}
                   </Link>
+                  <button
+                      onClick={() => handleButtonClick(open ? item.to : item.to)}
+                      className={`ml-[0.75rem] text-[#E8E8E8] font-extralight hover:font-medium hover:text-white mb-[2rem] ${!open && 'opacity-0 translate-x-28 overflow-hidden'}`}
+                      style={{
+                        transitionDelay: `${i + 3}00ms`,
+                      }}
+                    >
+                      {item.label}
+                    </button>
                 </li>
               ))}
             </ul>
