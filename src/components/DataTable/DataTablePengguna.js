@@ -5,6 +5,7 @@ import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
 import { ThreeDots } from 'react-loader-spinner';
+import NoData from '../../assets/NoData.png';
 
 export default function DataTablePengguna() {
     const [data, setData] = useState([]);
@@ -84,9 +85,13 @@ export default function DataTablePengguna() {
                 </div>
               ) : (
                 <> {totalRecords == 0 ? (
-                  <div className='mt-4'>
-                    Tidak ada data.
-                  </div>
+                    <div className="flex flex-row justify-start items-center mt-4">
+                        <img className='w-[40rem] h-[40rem]' src={NoData} alt='No-Data-Access'/>
+                        <div className='flex flex-col gap-5'>
+                            <h1 className='text-[1.5rem] font-semibold'>No Data Available</h1>
+                            <p className='text-[1rem] font-normal'>Tidak Ada Data Yang Dapat Ditampilkan </p>
+                        </div>
+                    </div>
                 ) : (
                   <table className='container'>
                     <thead className='w-[62.5rem] h-[3.5rem] bg-[#F3F3F3]'>

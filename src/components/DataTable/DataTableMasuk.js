@@ -4,6 +4,7 @@ import ArrowBackIosSharpIcon from '@mui/icons-material/ArrowBackIosSharp';
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { BsSearch } from 'react-icons/bs';
 import { ThreeDots } from 'react-loader-spinner';
+import NoData from '../../assets/NoData.png';
 
 export default function DataTableMasuk() {
     const [data, setData] = useState([]);
@@ -70,9 +71,9 @@ const getData = async () => {
             <div className='flex justify-start mt-4 mb-4'>
               <div className='flex'>
                     <input 
-                        className='bg-transparent border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none ' 
+                        className='bg-transparent border pl-4 rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] ml-2 focus:outline-none ' 
                         type='text' 
-                        placeholder='   Masukkan Nama Aset' 
+                        placeholder='Masukkan Nama Aset' 
                         onChange={Filter}
                     />
                     <BsSearch className='relative right-7 top-2' size={15}/>
@@ -85,8 +86,12 @@ const getData = async () => {
                   </div>
                 ) : (
                   <> { totalRecords == 0 ? (
-                    <div className='mt-4'>
-                      Tidak ada data.
+                    <div className="flex flex-row justify-start items-center mt-4">
+                        <img className='w-[40rem] h-[40rem]' src={NoData} alt='No-Data-Access'/>
+                        <div className='flex flex-col gap-5'>
+                            <h1 className='text-[1.5rem] font-semibold'>No Data Available</h1>
+                            <p className='text-[1rem] font-normal'>Tidak Ada Data Yang Dapat Ditampilkan </p>
+                        </div>
                     </div>
                   ) : (
                     <table>

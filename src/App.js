@@ -9,6 +9,7 @@ import DetailBarangKeluar from './Routes/DetailBarangKeluar';
 import Riwayat from './Routes/Riwayat/Riwayat';
 import Login from './pages/Login/Login';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import UpdateForm from './Routes/UpdateForm/UpdateForm';
 
 export default function App () {
   return (
@@ -23,6 +24,7 @@ export default function App () {
         <Route path='/Detail-Barang-Masuk/:_id' element={<DetailBarangMasuk />} />
         <Route path='/Detail-Barang-Keluar/:_id' element={<DetailBarangKeluar />} />
         <Route path='/Riwayat' element={<Riwayat />} />
+        <Route path='/Update-Aset/:_id' element={<UpdateForm />} />
         {/* Route untuk halaman 404 */}
         <Route path='*' element={<PageNotFound />} />
       </Routes>
