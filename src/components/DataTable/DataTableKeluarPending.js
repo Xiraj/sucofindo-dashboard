@@ -5,6 +5,7 @@ import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import { Link } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
 import { ThreeDots } from 'react-loader-spinner';
+import NoData from '../../assets/NoData.png';
 
 export default function DataTableKeluarPending() {
     const [data, setData] = useState([]);
@@ -85,8 +86,12 @@ export default function DataTableKeluarPending() {
                 ) : (
                   <>
                     {totalRecords == 0 ? (
-                      <div className="mt-4">
-                        Tidak ada data.
+                      <div className="flex flex-row justify-start items-center mt-4">
+                        <img className='w-[40rem] h-[40rem]' src={NoData} alt='No-Data-Access'/>
+                        <div className='flex flex-col gap-5'>
+                            <h1 className='text-[1.5rem] font-semibold'>No Data Available</h1>
+                            <p className='text-[1rem] font-normal'>Tidak Ada Data Yang Dapat Ditampilkan </p>
+                        </div>
                       </div>
                     ) : (
                       <table>
@@ -141,7 +146,7 @@ export default function DataTableKeluarPending() {
                                 <option value={20}>20</option>
                             </select>
                             <p className='ml-4'>
-                                Menampilkan Riwayat Barang Masuk
+                                Menampilkan Riwayat Barang Keluar
                             </p>
                         </label>
                     </div>

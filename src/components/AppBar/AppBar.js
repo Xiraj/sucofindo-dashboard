@@ -1,4 +1,4 @@
-  import { useEffect, useState } from 'react';
+  import React, { useEffect, useState } from 'react';
   import AppBar from '@mui/material/AppBar';
   import Box from '@mui/material/Box';
   import Toolbar from '@mui/material/Toolbar';
@@ -14,8 +14,20 @@
   import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
   import axios from 'axios';
+  import List from '@mui/material/List';
+  import ListItem from '@mui/material/ListItem';
+  import ListItemText from '@mui/material/ListItemText';
+import Notification from '../Notification/Notification';
+
+
 
   const settings = ['Keluar'];
+  const options = [
+    'Show some love to MUI',
+    'Show all notification content',
+    'Hide sensitive notification content',
+    'Hide all notification content',
+  ];
 
   function UserAppBar() {
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -35,7 +47,6 @@
         .then(response => {
           const username = response.data.username;
           setName(username);
-          console.log("Hahaha", username)
         })
         .catch(error => {
           console.error('Error fetching user profile:', error);
@@ -87,7 +98,22 @@
         console.error('Logout error', error);
         setError('Logout Gagal');
       }
-    };    
+    };
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [selectedIndex, setSelectedIndex] = React.useState(1);
+    const open = Boolean(anchorEl);
+    const handleClickListItem = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleMenuItemClick = (event, index) => {
+      setSelectedIndex(index);
+      setAnchorEl(null);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
 
     return (
       <>
@@ -96,18 +122,7 @@
           <Toolbar disableGutters>
             <Box sx={{ display: 'flex' }}>
               <Box sx={{ position: 'relative', left: '53.8rem' }}>
-                <MenuItem>
-                  <IconButton
-                    size="small"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                  >
-                    <Badge badgeContent={1} color="error">
-                      <FaRegBell color='#4E73DF' size={26}/>
-                    </Badge>
-                    <ToastContainer />
-                  </IconButton>
-                </MenuItem>
+                <Notification/>
               </Box>
               <Tooltip title="Apakah kamu sudah seleai menggunakan dashboard?">
                 <IconButton onClick={handleOpenUserMenu} sx={{ position: 'relative', left: '53.8rem' }}>
@@ -115,7 +130,7 @@
                   <FaUserCircle color='#4E73DF' size={30}/>
                 </IconButton>
               </Tooltip>
-
+              
               <Menu
                 sx={{ mt: '2.813rem' }}
                 id="menu-appbar"

@@ -70,9 +70,9 @@ export default function DataTableKeluar() {
             <div className='flex justify-start mb-4'>
                 <div className='flex'>
                     <input 
-                        className='bg-transparent border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none ' 
+                        className='bg-transparent pl-4 border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none ' 
                         type='text' 
-                        placeholder='   Masukkan Nama Aset' 
+                        placeholder='Masukkan Nama Aset' 
                         onChange={Filter}
                     />
                     <BsSearch className='relative right-7 top-2' size={15}/>

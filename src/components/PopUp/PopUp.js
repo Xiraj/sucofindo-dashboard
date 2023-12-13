@@ -10,7 +10,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
+
+
 const PopupForm = ({ isOpen, onClose, onSubmit }) => {
+  const [filteredData, setFilteredData] = useState([]);
+const [data, setData] = useState([]);
+
   const [formData, setFormData] = useState({
     nama_alat: '',
     tag_number: '',
@@ -21,18 +26,76 @@ const PopupForm = ({ isOpen, onClose, onSubmit }) => {
     penanggung_jawab: '',
   });
 
+  const [error, setError] = useState(null);
+
+  const getData = async () => {
+    try {
+      const response = await axios
+        .get("https://sima-rest-api.vercel.app/api/v1/data/aset", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        })
+        .then((response) => {
+          setData(response.data.data);
+          setFilteredData(response.data.data);
+        });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
   const postData = async () => {
     try {
-        const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/data/addAset', formData);
-        console.log('Data posted successfully:', response.data);
-        
+      const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/data/addAset', formData);
+      console.log('Data posted successfully:', response.data);
+      getData();
     } catch (error) {
-        console.error('Error fetching data:', error);
+      console.error('Error posting data:', error);
     }
-};
+  };
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const requiredFields = ['nama_alat', 'tag_number', 'nomor_seri', 'merek', 'tipe', 'lokasi_aset', 'penanggung_jawab'];
+    const hasNullValues = requiredFields.some(field => formData[field] == null || formData[field] === '');
+  
+    if (hasNullValues) {
+      setError('Please fill in all required fields.');
+      setOpen(true);
+      return;
+    }
+  
+    try {
+      await postData();
+      onSubmit(formData);
+      onClose();
+      setFormData({
+        nama_alat: '',
+        tag_number: '',
+        nomor_seri: '',
+        merek: '',
+        tipe: '',
+        lokasi_aset: '',
+        penanggung_jawab: '',
+      });
+    } catch (error) {
+      console.error('Error posting or handling data:', error);
+      setError('An error occurred. Please try again.');
+      setOpen(true);
+    }
+  
+    try {
+      await getData();
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  
 
 useEffect(() => {
-    postData();
+    getData();
 }, []);
 
   const handleChange = (e) => {
@@ -40,16 +103,6 @@ useEffect(() => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await postData();
-      onSubmit(formData);
-      onClose();
-    } catch (error) {
-      console.error('Error posting data:', error);
-    }
-  };
   const [open, setOpen] = React.useState(false);
 
   const handleClick = () => {
@@ -60,8 +113,8 @@ useEffect(() => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
+    onClose();
   };
   
   return (
@@ -74,14 +127,16 @@ useEffect(() => {
           &#8203;
         </span>
         <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-top sm:max-w-3xl sm:w-full sm:p-6">
-          <form onSubmit={handleSubmit}>
-            <div className='flex justify-end'>
-              <button className='w-8 border-2 border-zinc-700 rounded-xl'>
+        <div className='flex justify-end'>
+              <button className='w-8 border-2 border-zinc-700 rounded-xl' onClick={() => {
+                handleClose();
+              }}>
                 <h1 className='text-[1.2rem]'>
                   X
                 </h1>
               </button>
             </div>
+          <form onSubmit={handleSubmit}>
             <div className='grid justify-items-stretch my-4'>
                 <div className='flex justify-between'>
                     <img alt="logo" className='w-[14rem] h-[9rem]' src={Logo}/>
@@ -192,11 +247,17 @@ useEffect(() => {
                   >
                     SUBMIT
                   </Button>
-                  <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                    <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        Berhasil Menambahkan Aset Barang
-                    </Alert>
-                  </Snackbar>
+                  <Snackbar open={open} onClose={handleClose}>
+            {error ? (
+              <Alert onClose={() => { handleClose(); setError(null); }} severity="error" sx={{ width: '100%' }}>
+                {error}
+              </Alert>
+            ) : (
+              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                Berhasil Menambahkan Aset Barang
+              </Alert>
+            )}
+          </Snackbar>
               </Stack>
             </div>
           </form>

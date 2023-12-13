@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../Context';
 import { ToastContainer, toast } from 'react-toastify';
+import Backdrop from '../BackDrop/BackDrop';
 
 export default function LoginForm() {
   const [showPass, setShowPass] = useState(false);
@@ -82,9 +83,7 @@ export default function LoginForm() {
             </span>
           </div>
           {error && <p className="text-red-500 mt-2">{error}</p>} {/* Display the error message */}
-          <button type="submit" className='bg-main-color w-[27rem] h-[3.25rem] mt-[2.5rem] rounded-md text-white font-semibold'>
-            Masuk
-          </button>
+          <Backdrop/>
         </div>
       </form>
       <ToastContainer/>

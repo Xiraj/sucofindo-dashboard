@@ -10,7 +10,11 @@ module.exports = {
         Montserrat: [
           "Montserrat", "sans-serif"
         ]
-      }
+      },
+      maxHeight: {
+        '1/2': '50%',
+        '3/4': '75%',
+      },
     },
   },
   plugins: [],

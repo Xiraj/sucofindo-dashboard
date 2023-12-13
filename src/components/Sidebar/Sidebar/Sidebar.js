@@ -98,7 +98,7 @@ export default function Sidebar({ userRole }) {
 
   return (
     <aside className='flex z-10'>
-      <Box className={`${open ? "w-[16.8rem]" : "w-[8rem]"} duration-300 bg-main-color`}>
+      <Box className={`${open ? "w-[16.8rem]" : "w-[8rem]"} duration-300 bg-main-color border-white`}>
         <Box className={`${open ? "w-[16rem]" : "w-[8rem]"} fixed`}>
           <Box className='flex'>
             <Box className='mt-[1.5rem] ml-[1.5rem]'>
@@ -133,7 +133,7 @@ export default function Sidebar({ userRole }) {
               <li key={i} className='flex'>
                 {item.icon}
                 <Link
-                  className={`ml-[0.75rem] text-white mb-[2rem] ${!open && 'opacity-0 translate-x-28 overflow-hidden'}`}
+                  className={`ml-[0.75rem] text-[#E8E8E8] font-extralight hover:font-medium hover:text-white mb-[2rem] ${!open && 'opacity-0 translate-x-28 overflow-hidden'}`}
                   to={`${open ? item.to : item.to}`}
                   style={{
                     transitionDelay: `${i + 3}00ms`,
