@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from "react-toastify";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { CircularProgress } from "@mui/material";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -14,6 +15,7 @@ export default function UpdateAsetPage ({onClose}) {
     const [data, setData] = useState([]);
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
       const fetchData = async () => {
@@ -29,6 +31,8 @@ export default function UpdateAsetPage ({onClose}) {
           setData(asetData);
         } catch (error) {
           console.error('Error fetching data:', error);
+        } finally {
+          setLoading(false);
         }
       };
     
@@ -78,7 +82,15 @@ export default function UpdateAsetPage ({onClose}) {
             <div className="relative top-[4rem]">
              <div className="bg-white max-w-5xl max-h-full ml-[2.5rem] rounded-md">
                 <p className="ml-[2.5rem] pt-[1.5rem] text-[2rem] font-Montserrat font-semibold">Data Aset</p>
-                <div className="flex flex-row ml-[2.5rem] mt-[2.2rem]">
+                {
+                  loading ? (
+                    <div className="flex items-center justify-center w-full h-full">
+                      <div className="self-center m-16">
+                        <CircularProgress/>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-row ml-[2.5rem] mt-[2.2rem]">
                     {Object.keys(data).length > 0 && (
                     <div className="mb-[2.5rem]" key={data._id}>
                         <p className="text-[1.25rem] font-semibold text-[#515151]">Nama Aset</p>
@@ -138,6 +150,8 @@ export default function UpdateAsetPage ({onClose}) {
                     </div>
                     )}
                 </div>
+                  )
+                }
               </div>
               </div>
             <div className="flex flex-row mt-[4rem] ml-[40.8rem] gap-4 mb-[3rem] relative bottom-[7.7rem]">

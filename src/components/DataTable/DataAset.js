@@ -225,7 +225,7 @@ function DataAset() {
                             <div className="relative bg-white w-full max-w-md p-6 rounded-lg shadow-lg">
                               <div className="p-6 text-center">
                                 <h3 className="mb-5 text-lg font-normal text-gray-500">
-                                  Are you sure you want to delete?
+                                  Apakah Anda yakin ingin menghapus?
                                 </h3>
                                 <button
                                   onClick={deleteData}

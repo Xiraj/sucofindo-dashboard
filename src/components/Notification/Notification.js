@@ -113,7 +113,7 @@ export default function Notification() {
                         </div>
                         <h1
                           className={`pr-2 ${
-                            item.id_pengembalian?.status === "Pending"
+                            item.status === "Pending"
                               ? "text-yellow-500"
                               : item.status === "Approved"
                               ? "text-green-500"
