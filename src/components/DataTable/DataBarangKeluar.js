@@ -27,7 +27,6 @@ export default function DataTableKeluar() {
         })
         .then(
             response=> {
-                console.log("Peminjaman",response.data.peminjamanHistory)
                 setData(response.data.peminjamanHistory)
                 setFilteredData(response.data.peminjamanHistory)
         });

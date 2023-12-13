@@ -26,8 +26,6 @@ export default function DataTableKeluarApproved() {
               },
             });
             
-            console.log("Peminjaman", response.data.peminjaman);
-            
             const filteredData = response.data.peminjaman.filter(item => item.status === status);
             setData(filteredData);
             setFilteredData(filteredData);

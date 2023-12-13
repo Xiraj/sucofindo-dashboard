@@ -14,7 +14,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 const PopupForm = ({ isOpen, onClose, onSubmit }) => {
   const [filteredData, setFilteredData] = useState([]);
-const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
 
   const [formData, setFormData] = useState({
     nama_alat: '',
@@ -49,7 +49,6 @@ const [data, setData] = useState([]);
   const postData = async () => {
     try {
       const response = await axios.post('https://sima-rest-api.vercel.app/api/v1/data/addAset', formData);
-      console.log('Data posted successfully:', response.data);
       getData();
     } catch (error) {
       console.error('Error posting data:', error);

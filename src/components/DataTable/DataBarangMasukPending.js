@@ -26,10 +26,7 @@ export default function DataTableMasukPending() {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('authToken')}`,
               },
-            });
-            
-            console.log("Peminjaman", response.data.pengembalian);
-            
+            });       
             const filteredData = response.data.pengembalian.filter(item => item.status === status);
             setData(filteredData);
             setFilteredData(filteredData);

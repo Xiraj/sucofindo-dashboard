@@ -8,7 +8,6 @@ export default function CardStatusBarangKeluar () {
       try {
         const response = await axios.get("https://sima-rest-api.vercel.app/api/v1/aset/listpinjam");
         setData(response.data.peminjaman);
-        console.log("apaaa", response.data.peminjaman)
       } catch (error) {
         console.error('Error fetching data:', error);
       }

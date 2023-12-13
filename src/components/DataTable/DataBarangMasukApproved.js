@@ -26,8 +26,6 @@ export default function DataTableMasukApproved() {
               },
             });
             
-            console.log("Pengembalian", response.data.pengembalian);
-            
             const filteredData = response.data.pengembalian.filter(item => item.status === status);
             setData(filteredData);
             setFilteredData(filteredData);

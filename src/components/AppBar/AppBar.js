@@ -8,16 +8,12 @@
   import Container from '@mui/material/Container';
   import Tooltip from '@mui/material/Tooltip';
   import MenuItem from '@mui/material/MenuItem';
-  import { FaRegBell, FaUserCircle } from 'react-icons/fa';
+  import { FaUserCircle } from 'react-icons/fa';
   import { Link, useNavigate } from 'react-router-dom';
-  import { Badge } from '@mui/material';
   import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
   import axios from 'axios';
-  import List from '@mui/material/List';
-  import ListItem from '@mui/material/ListItem';
-  import ListItemText from '@mui/material/ListItemText';
-import Notification from '../Notification/Notification';
+  import Notification from '../Notification/Notification';
 
 
 
@@ -84,7 +80,6 @@ import Notification from '../Notification/Notification';
         );
     
         if (response.status === 200) {
-          console.log('Logout successful', response.data);
     
           localStorage.clear();
     

@@ -26,7 +26,7 @@ function DataAset() {
   const [showRemoveModal, setShowRemoveModal] = useState(false);
 
   const handleDeleteClick = (itemId) => {
-    setDeleteItemId(itemId); // Capture the item ID
+    setDeleteItemId(itemId);
     setShowRemoveModal(true);
   };
 
@@ -35,10 +35,9 @@ function DataAset() {
       await axios
         .delete(`https://sima-rest-api.vercel.app/api/v1/data/deleteAset/${deleteItemId}`)
         .then((response) => {
-          console.log("Product deleted:", response.data.data);
         });
       setShowRemoveModal(false);
-      setDeleteItemId(null); // Reset the captured item ID
+      setDeleteItemId(null);
       getData();
     }
   };
@@ -95,8 +94,8 @@ function DataAset() {
   }
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const handleFormSubmit = (data) => {
-    console.log("Form submitted:", data);
+  const handleFormSubmit = () => {
+    getData();
   };
 
   return (

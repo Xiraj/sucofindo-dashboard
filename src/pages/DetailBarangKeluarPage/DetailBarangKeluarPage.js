@@ -22,7 +22,6 @@ export default function DetailBarangKeluarPage () {
     
           const userId = userResponse.data.id;
           setUserId(userId);
-          console.log("User ID:", userId);
     
           const asetResponse = await axios.get(`https://sima-rest-api.vercel.app/api/v1/aset/listPeminjam/${_id}`, {
             headers: {
@@ -32,7 +31,6 @@ export default function DetailBarangKeluarPage () {
           });
           const asetData = asetResponse.data.peminjaman;
           setData(asetData);
-          console.log("Aset Data:", asetData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -55,8 +53,6 @@ export default function DetailBarangKeluarPage () {
             },
           }
         );
-    
-        console.log('Accept Success', response.data);
         toast('Peminjaman Diterima!', {
           position: toast.POSITION.BOTTOM_RIGHT,
         })
@@ -80,8 +76,6 @@ export default function DetailBarangKeluarPage () {
             },
           }
         );
-    
-        console.log('Reject Success', response.data);
         toast('Peminjaman Ditolak!', {
           position: toast.POSITION.BOTTOM_RIGHT,
         })          

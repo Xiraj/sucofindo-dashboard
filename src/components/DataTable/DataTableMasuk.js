@@ -28,7 +28,6 @@ const getData = async () => {
             })
                 .then(
                     response=> {
-                        console.log("pengembalian",response.data.pengembalianHistory)
                         setData(response.data.pengembalianHistory)
                         setFilteredData(response.data.pengembalianHistory)
                 });
@@ -85,7 +84,7 @@ const getData = async () => {
                     <ThreeDots type="ThreeDots" color="#555555" height={50} width={50} />
                   </div>
                 ) : (
-                  <> { totalRecords == 0 ? (
+                  <> { totalRecords === 0 ? (
                     <div className="flex flex-row justify-start items-center mt-4">
                         <img className='w-[40rem] h-[40rem]' src={NoData} alt='No-Data-Access'/>
                         <div className='flex flex-col gap-5'>

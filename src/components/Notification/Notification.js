@@ -34,9 +34,6 @@ export default function Notification() {
   
       setNotificationCount(notificationCount);
       setFilteredData(notificationData);
-  
-      console.log('Peminjaman Response:', peminjamanResponse);
-      console.log('Pengembalian Response:', pengembalianResponse);
     } catch (error) {
       console.error('Error fetching data:', error);
     } finally {
@@ -61,7 +58,6 @@ useEffect(() => {
       {notificationCount > 0 && (
   <div className={`absolute text-[12px] w-5 h-5 top-0 right-0 text-center justify-center items-center flex bg-red-500 text-white rounded-full px-2 ${showPopup ? 'visible opacity-100' : 'visible opacity-100'}`}>
     {filteredData.reduce((count, item) => {
-      // Check if tag_number is not null before incrementing count
       if (item.id_aset?.tag_number != null) {
         return count + 1;
       }

@@ -21,14 +21,12 @@ export default function Sidebar() {
     .then(response => {
       const role = response.data.role;
       setRole(role);
-      console.log("Role", role)
     })
     .catch(error => {
       console.error('Error fetching user profile:', error);
     })
     .finally (() => {
       setLoading(false);
-      console.log(loading)
     });
   }
 ,[])

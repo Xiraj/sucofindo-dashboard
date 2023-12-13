@@ -28,8 +28,6 @@ export default function DataTableKeluarPending() {
               },
             });
             
-            console.log("Peminjaman", response.data.peminjaman);
-            
             const filteredData = response.data.peminjaman.filter(item => item.status === status);
             setData(filteredData);
             setFilteredData(filteredData);
@@ -85,7 +83,7 @@ export default function DataTableKeluarPending() {
                   </div>
                 ) : (
                   <>
-                    {totalRecords == 0 ? (
+                    {totalRecords === 0 ? (
                       <div className="flex flex-row justify-start items-center mt-4">
                         <img className='w-[40rem] h-[40rem]' src={NoData} alt='No-Data-Access'/>
                         <div className='flex flex-col gap-5'>

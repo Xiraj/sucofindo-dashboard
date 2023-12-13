@@ -26,8 +26,6 @@ export default function DataTableKeluarRejected() {
               },
             });
             
-            console.log("Peminjaman", response.data.peminjaman);
-            
             const filteredData = response.data.peminjaman.filter(item => item.status === status);
             setData(filteredData);
             setFilteredData(filteredData);
@@ -82,7 +80,7 @@ export default function DataTableKeluarRejected() {
                   <ThreeDots type="ThreeDots" color="#555555" height={50} width={50} />
                 </div>
               ) : (
-                <> {totalRecords == 0 ? (
+                <> {totalRecords === 0 ? (
                     <div className="mt-4">
                       Tidak ada data.
                     </div>

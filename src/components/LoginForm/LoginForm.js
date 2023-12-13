@@ -31,8 +31,6 @@ export default function LoginForm() {
         email,
         password,
       });
-  
-      console.log('Login successful', response.data);
 
       const { user } = response.data;
 

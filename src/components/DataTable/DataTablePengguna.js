@@ -28,8 +28,6 @@ export default function DataTablePengguna() {
             },
           });
           
-          console.log("Peminjaman", response.data);
-          
           const filteredData = response.data.filter(item => item.role === role);
           setData(filteredData);
           setFilteredData(filteredData);

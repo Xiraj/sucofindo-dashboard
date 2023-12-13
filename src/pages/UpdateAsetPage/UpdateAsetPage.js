@@ -9,7 +9,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function UpdateAsetPage () {
+export default function UpdateAsetPage ({onClose}) {
     const { _id } = useParams([]);
     const [data, setData] = useState([]);
     const navigate = useNavigate();
@@ -27,7 +27,6 @@ export default function UpdateAsetPage () {
           });
           const asetData = asetResponse.data.data;
           setData(asetData);
-          console.log("Aset Data:", asetData);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -56,8 +55,6 @@ export default function UpdateAsetPage () {
             },
           }
         );
-    
-        console.log('Update Success', response.data);
         toast('Update Sukses!', {
           position: toast.POSITION.BOTTOM_RIGHT,
         })
