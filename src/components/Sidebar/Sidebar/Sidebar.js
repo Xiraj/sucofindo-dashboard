@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Box } from "@mui/material";
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import SucofindoLogo from '../../../assets/logo-sucofindo.png';
 import { BsArrowLeftCircleFill } from 'react-icons/bs';
 import { FaFolder, FaHome } from 'react-icons/fa';
 import { RiFolderDownloadFill, RiFolderUploadFill, RiFolderHistoryFill } from 'react-icons/ri';
 import axios from 'axios';
-
+ 
 export default function Sidebar() {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(true);
   const [role, setRole] = useState('');
   const [loading, setLoading] = useState(true);
@@ -21,40 +22,42 @@ export default function Sidebar() {
     .then(response => {
       const role = response.data.role;
       setRole(role);
+      console.log("Role", role)
     })
     .catch(error => {
       console.error('Error fetching user profile:', error);
     })
     .finally (() => {
       setLoading(false);
+      console.log(loading)
     });
   }
 ,[])
-
+ 
   const getMenuItems = () => {
     const userRole=`${role}`;
     const menuItemsByRole = {
       admin: [
         { icon: <FaHome 
-          className={`${!open && 'cursor-pointer w-[8rem]'}`} 
+          className={`${open ? 'cursor-pointer' : 'w-[4.72rem]'}`}
           color='white' size={`${ open ? 20 : 24 }`} 
         />, 
         to: '/Home', label: 'Home'
         },
         {   icon: <RiFolderDownloadFill
-          className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
+          className={`${open ? 'cursor-pointer' : 'w-[4.72rem]'}`}
           color='white' size={`${ open ? 20 : 26 }`} 
           />, 
           to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
         },
         {   icon: <RiFolderUploadFill
-              className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
+              className={`${open ? 'cursor-pointer' : 'w-[4.72rem] relative bottom-3'}`}
               color='white' size={`${ open ? 20 : 26 }`} 
             />, 
             to: '/Barang-Masuk', label: 'Persetujuan Pengembalian'
         },
         {   icon: <RiFolderHistoryFill
-                className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
+                className={`${open ? 'cursor-pointer' : 'w-[4.72rem] relative bottom-2'}`}
                 color='white' size={`${ open ? 20 : 26 }`} 
             />, 
             to: '/Riwayat', label: 'Riwayat'
@@ -62,43 +65,50 @@ export default function Sidebar() {
       ],
       superAdmin: [
         { icon: <FaHome 
-          className={`${!open && 'cursor-pointer w-[8rem]'}`} 
+          className={`${open ? 'cursor-pointer' : 'cursor-pointer'}`}
           color='white' size={`${ open ? 20 : 24 }`} 
         />, 
         to: '/Home', label: 'Home'
         },
         {   icon: <FaFolder 
-                    className={`${!open && 'cursor-pointer relative top-[2rem] ml-[1rem] w-[8rem]'}`} 
+                    className={`${open ? 'cursor-pointer' : 'w-[4.72rem] relative bottom-2'}`}
                     color='white' size={`${ open ? 20 : 24 }`} 
             />, 
             to: '/Total-Aset', label: 'Total Aset Tersedia'
         },
         {   icon: <RiFolderDownloadFill
-          className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
+          className={`${open ? 'cursor-pointer' : 'w-[4.72rem] relative bottom-5'}`}
           color='white' size={`${ open ? 20 : 26 }`} 
           />, 
           to: '/Barang-Keluar', label: 'Persetujuan Peminjaman'
         },
         {   icon: <RiFolderUploadFill
-              className={`${!open && 'cursor-pointer ml-[1.1rem] relative top-[1rem] w-[8rem]'}`} 
+             className={`${open ? 'cursor-pointer' : 'w-[4.72rem] relative bottom-4'}`}
               color='white' size={`${ open ? 20 : 26 }`} 
             />, 
             to: '/Barang-Masuk', label: 'Persetujuan Pengembalian'
         },
         {   icon: <RiFolderHistoryFill
-                className={`${!open && 'cursor-pointer relative top-[1rem] w-[8rem]'}`} 
+                className={`${open ? 'cursor-pointer' : 'w-[4.72rem]'}`}
                 color='white' size={`${ open ? 20 : 26 }`} 
             />, 
             to: '/Riwayat', label: 'Riwayat'
         },
       ],
     };
-
+ 
     return menuItemsByRole[userRole] || [];
   };
-
+  const handleSidebarToggle = () => {
+    setOpen(!open);
+  };
+ 
+  const handleButtonClick = (to) => {
+    handleSidebarToggle();
+    navigate(to);
+  };
+ 
   const menuItems = getMenuItems();
-
   return (
     <aside className='flex z-10'>
       <Box className={`${open ? "w-[16.8rem]" : "w-[8rem]"} duration-300 bg-main-color border-white`}>
@@ -140,16 +150,21 @@ export default function Sidebar() {
             <ul className='ml-[1.5rem] mt-[2rem]'>
               {menuItems.map((item, i) => (
                 <li key={i} className='flex'>
-                  {item.icon}
-                  <Link
-                    className={`ml-[0.75rem] text-[#E8E8E8] font-extralight hover:font-medium hover:text-white mb-[2rem] ${!open && 'opacity-0 translate-x-28 overflow-hidden'}`}
+                <Link
+                    className={`${open ? 'cursor-pointer' : 'flex justify-center items-center w-[12rem]'}`}
                     to={`${open ? item.to : item.to}`}
-                    style={{
-                      transitionDelay: `${i + 3}00ms`,
-                    }}
                   >
-                    {item.label}
+                    {item.icon}
                   </Link>
+                  <button
+                      onClick={() => handleButtonClick(open ? item.to : item.to)}
+                      className={`ml-[0.75rem] text-[#E8E8E8] font-extralight hover:font-medium hover:text-white mb-[2rem] ${!open && 'opacity-0 translate-x-28 overflow-hidden'}`}
+                      style={{
+                        transitionDelay: `${i + 3}00ms`,
+                      }}
+                    >
+                      {item.label}
+                    </button>
                 </li>
               ))}
             </ul>
