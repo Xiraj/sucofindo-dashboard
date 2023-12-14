@@ -291,7 +291,7 @@ function DataAset() {
                   key={number}
                 >
                   <a
-                    className="hover:border-2 hover:border-main-color rounded-xl hover:w-4 page-item text-[1.1rem] p-2"
+                    className='hover:border-main-color hover:rounded-xl hover:border-2 hover:w-2 page-item hover:text-center text-[1.1rem] p-2'
                     onClick={() => handlePageChange(number)}
                   >
                     {number}
