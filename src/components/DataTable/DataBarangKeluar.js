@@ -230,7 +230,7 @@ export default function DataTableKeluar() {
               <p className="ml-4">Menampilkan Riwayat Barang Keluar</p>
             </label>
           </div>
-          <div className="flex justify-center ">
+          <div className="flex justify-center">
             <li className="page-item">
               <a
                 className="page-link cursor-pointer"
@@ -251,7 +251,7 @@ export default function DataTableKeluar() {
                   key={number}
                 >
                   <a
-                    className="page-item text-[1.1rem] m-4"
+                    className='hover:border-main-color hover:rounded-xl hover:border-2 hover:w-2 page-item hover:text-center text-[1.1rem] p-2'
                     onClick={() => handlePageChange(number)}
                   >
                     {number}
