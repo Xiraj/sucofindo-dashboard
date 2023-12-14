@@ -22,14 +22,12 @@ export default function Sidebar() {
     .then(response => {
       const role = response.data.role;
       setRole(role);
-      console.log("Role", role)
     })
     .catch(error => {
       console.error('Error fetching user profile:', error);
     })
     .finally (() => {
       setLoading(false);
-      console.log(loading)
     });
   }
 ,[])
@@ -156,15 +154,15 @@ export default function Sidebar() {
                   >
                     {item.icon}
                   </Link>
-                  <button
-                      onClick={() => handleButtonClick(open ? item.to : item.to)}
+                  <Link
+                      to={`${open ? item.to : item.to}`}
                       className={`ml-[0.75rem] text-[#E8E8E8] font-extralight hover:font-medium hover:text-white mb-[2rem] ${!open && 'opacity-0 translate-x-28 overflow-hidden'}`}
                       style={{
                         transitionDelay: `${i + 3}00ms`,
                       }}
                     >
                       {item.label}
-                    </button>
+                    </Link>
                 </li>
               ))}
             </ul>

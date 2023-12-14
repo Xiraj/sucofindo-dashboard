@@ -40,9 +40,6 @@ export default function Notification() {
  
       setNotificationCount(notificationCount);
       setFilteredData(notificationData);
- 
-      console.log("Peminjaman Response:", peminjamanResponse);
-      console.log("Pengembalian Response:", pengembalianResponse);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {

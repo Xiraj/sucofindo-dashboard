@@ -3,7 +3,7 @@ import axios from "axios";
 import ArrowBackIosSharpIcon from "@mui/icons-material/ArrowBackIosSharp";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import { BsSearch } from "react-icons/bs";
-import NoData from '../../assets/NoData.png';
+import NoData from "../../assets/NoData.png";
 import { ThreeDots } from "react-loader-spinner";
 
 export default function DataTableKeluar() {
@@ -31,6 +31,7 @@ export default function DataTableKeluar() {
         })
         .then(
             response=> {
+                console.log(response.data.peminjamanHistory)
                 setData(response.data.peminjamanHistory)
                 setFilteredData(response.data.peminjamanHistory)
         });
@@ -89,7 +90,7 @@ export default function DataTableKeluar() {
       ) : (
         <>
           {" "}
-          {totalRecords === 0 ? (
+          {totalRecords == 0 ? (
             <div className="flex flex-row justify-start items-center mt-4">
               <img
                 className="w-[40rem] h-[40rem]"
