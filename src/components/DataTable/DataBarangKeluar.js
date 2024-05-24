@@ -29,11 +29,10 @@ export default function DataTableKeluar() {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,
           },
         })
-        .then(
-            response=> {
-                console.log(response.data.peminjamanHistory)
-                setData(response.data.peminjamanHistory)
-                setFilteredData(response.data.peminjamanHistory)
+        .then((response) => {
+          console.log(response.data.peminjamanHistory);
+          setData(response.data.peminjamanHistory);
+          setFilteredData(response.data.peminjamanHistory);
         });
       setData(response.data.peminjamanHistory);
     } catch (error) {
@@ -143,6 +142,9 @@ export default function DataTableKeluar() {
                   <td className="w-[88.625rem] border-y-2 border-[#e8e8e8]">
                     Tujuan Peminjaman
                   </td>
+                  <th className="w-[98.625rem] pl-[1rem] py-2 border-y-2 border-[#e8e8e8] text-left">
+                    Waktu Peminjaman
+                  </th>
                   <td className="w-[78.625rem] border-y-2 border-[#e8e8e8]">
                     Diajukan Oleh
                   </td>
@@ -189,6 +191,9 @@ export default function DataTableKeluar() {
                     </td>
                     <td className="w-[88.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]">
                       {item.id_peminjaman?.tujuan_peminjaman}
+                    </td>
+                    <td className="w-[68.625rem] pl-[4rem] h-[3.5rem] border-y-2 border-[#e8e8e8]">
+                      {item.id_peminjaman?.waktu_peminjaman + " Hari"}
                     </td>
                     <td className="w-[68.625rem] h-[3.5rem] border-y-2 border-[#e8e8e8]">
                       {item.id_user.username}
@@ -251,7 +256,7 @@ export default function DataTableKeluar() {
                   key={number}
                 >
                   <a
-                    className='hover:border-main-color hover:rounded-xl hover:border-2 hover:w-2 page-item hover:text-center text-[1.1rem] p-2'
+                    className="hover:border-main-color hover:rounded-xl hover:border-2 hover:w-2 page-item hover:text-center text-[1.1rem] p-2"
                     onClick={() => handlePageChange(number)}
                   >
                     {number}
