@@ -291,10 +291,10 @@ export default function DataHistorySemua() {
                     </td>
                     <td
                       className={`w-[58.625rem] pl-[1rem] h-[3.5rem] border-r-2 border-y-2 border-[#e8e8e8] ${
-                        item.id_pengembalian?.status ||
+                        item.id_pengembalian?.status === "Pending" ||
                         item.id_peminjaman?.status === "Pending"
                           ? "text-yellow-500"
-                          : item.id_pengembalian?.status ||
+                          : item.id_pengembalian?.status === "Approved" ||
                             item.id_peminjaman?.status === "Approved"
                           ? "text-green-500"
                           : "text-red-500"
