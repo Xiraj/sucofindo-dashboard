@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import DataTableMasuk from "../DataTable/DataTableMasuk";
 import DataTableKeluar from "../DataTable/DataBarangKeluar";
+import DataHistorySemua from "../DataTable/DataHistorySemua";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,8 +52,9 @@ export default function BasicTabs() {
     <Box sx={{ width: "100%" }}>
       <Box>
         <Tabs value={value} onChange={handleChange}>
-          <Tab label="Peminjaman" {...a11yProps(0)} />
-          <Tab label="Pengembalian" {...a11yProps(1)} />
+          <Tab label="Semua" {...a11yProps(0)} />
+          <Tab label="Peminjaman" {...a11yProps(1)} />
+          <Tab label="Pengembalian" {...a11yProps(2)} />
         </Tabs>
       </Box>
       <CustomTabPanel
@@ -60,12 +62,19 @@ export default function BasicTabs() {
         value={value}
         index={0}
       >
-        <DataTableKeluar />
+        <DataHistorySemua />
       </CustomTabPanel>
       <CustomTabPanel
         className="md:w-[60rem] overflow-x-auto pr-10 pt-7"
         value={value}
         index={1}
+      >
+        <DataTableKeluar />
+      </CustomTabPanel>
+      <CustomTabPanel
+        className="md:w-[60rem] overflow-x-auto pr-10 pt-7"
+        value={value}
+        index={2}
       >
         <DataTableMasuk />
       </CustomTabPanel>

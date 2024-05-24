@@ -36,8 +36,7 @@ function DataAset() {
         .delete(
           `https://sima-rest-api.vercel.app/api/v1/data/deleteAset/${deleteItemId}`
         )
-        .then((response) => {
-        });
+        .then((response) => {});
       setShowRemoveModal(false);
       setDeleteItemId(null);
       getData();
@@ -104,7 +103,7 @@ function DataAset() {
     <div className="w-full md:w-[107.5rem] mx-auto overflow-y-auto overflow-x-auto md:mr-[2.5rem]">
       <div className="grid justify-items-stretch mb-3">
         <div className="flex justify-start">
-          <div className="flex justify-start relative top-6">
+          <div className="flex justify-start relative top-10">
             <input
               className="bg-transparent pl-4 border rounded-lg border-black w-[150px] h-[30px] sm:w-[250px] focus:outline-none "
               type="text"
@@ -116,7 +115,7 @@ function DataAset() {
         </div>
         <div className="flex justify-center">
           <button
-            className="bg-[#2AC43A] w-[9.4rem] h-[2.875rem] rounded-lg"
+            className="bg-[#2AC43A] hover:bg-green-700 w-[9.4rem] h-[2.875rem] rounded-lg"
             onClick={() => setIsPopupOpen(true)}
           >
             <div className="flex justify-between">
@@ -291,7 +290,7 @@ function DataAset() {
                   key={number}
                 >
                   <a
-                    className='hover:border-main-color hover:rounded-xl hover:border-2 hover:w-2 page-item hover:text-center text-[1.1rem] p-2'
+                    className="hover:border-main-color hover:rounded-xl hover:border-2 hover:w-2 page-item hover:text-center text-[1.1rem] p-2"
                     onClick={() => handlePageChange(number)}
                   >
                     {number}
